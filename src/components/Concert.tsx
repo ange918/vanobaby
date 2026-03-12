@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const TARGET = new Date('2025-12-31T23:59:59');
+const TARGET = new Date('2026-04-04T20:00:00');
 
 function getTimeLeft() {
   const diff = TARGET.getTime() - Date.now();
@@ -21,7 +21,7 @@ function Digit({ value, label }: { value: number; label: string }) {
       <div
         style={{
           fontFamily: 'var(--font-bebas)',
-          fontSize: 'clamp(3.5rem, 8vw, 7rem)',
+          fontSize: 'clamp(3rem, 8vw, 7rem)',
           color: '#C0392B',
           lineHeight: 1,
           letterSpacing: '0.02em',
@@ -71,7 +71,7 @@ export default function Concert() {
   return (
     <section
       id="concert"
-      style={{ backgroundColor: '#080808', padding: '8rem 2.5rem', textAlign: 'center' }}
+      style={{ backgroundColor: '#080808', padding: 'clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 2.5rem)', textAlign: 'center' }}
     >
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <motion.p
@@ -96,7 +96,7 @@ export default function Concert() {
           transition={{ delay: 0.1 }}
           style={{
             fontFamily: 'var(--font-bebas)',
-            fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
+            fontSize: 'clamp(2.25rem, 6vw, 5.5rem)',
             color: '#C0392B',
             letterSpacing: '0.04em',
             lineHeight: 1,
@@ -115,10 +115,20 @@ export default function Concert() {
             color: '#ffffff',
             fontSize: '1.1rem',
             letterSpacing: '0.1em',
-            marginBottom: '4rem',
+            marginBottom: '0.5rem',
           }}
         >
-          Cotonou, Bénin
+          04 AVRIL 2026 — Cotonou, Bénin
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.25 }}
+          style={{ color: '#999999', fontSize: '0.8rem', letterSpacing: '0.08em', marginBottom: '3.5rem' }}
+        >
+          20H00 — Ouverture des portes à 18H00
         </motion.p>
 
         {/* Countdown */}
@@ -131,7 +141,7 @@ export default function Concert() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '1.5rem',
+            gap: 'clamp(0.75rem, 3vw, 1.5rem)',
             marginBottom: '4rem',
             flexWrap: 'wrap',
           }}
@@ -145,12 +155,10 @@ export default function Concert() {
           <Digit value={timeLeft.seconds} label="Secondes" />
         </motion.div>
 
-        {/* Divider */}
         <div style={{ width: 60, height: 2, backgroundColor: '#C0392B', margin: '0 auto 3rem' }} />
 
-        {/* CTA */}
         <motion.a
-          href="#contact"
+          href="/concert"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -168,7 +176,6 @@ export default function Concert() {
             letterSpacing: '0.12em',
             textTransform: 'uppercase',
             transition: 'background-color 0.25s ease, color 0.25s ease',
-            borderRadius: 0,
           }}
         >
           Réserver ma place

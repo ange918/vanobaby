@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import PageHero from '@/components/PageHero';
 
 const socials = [
   { name: 'Instagram', href: '#' },
@@ -42,98 +43,41 @@ export default function ContactPage() {
   };
 
   return (
-    <div style={{ backgroundColor: '#080808', minHeight: '100vh', paddingTop: '70px' }}>
+    <div style={{ backgroundColor: '#080808', minHeight: '100vh' }}>
 
-      {/* Header */}
-      <section style={{ padding: 'clamp(3rem, 6vw, 5rem) clamp(1.25rem, 5vw, 2.5rem) 0' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{ fontSize: '0.7rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#C0392B', marginBottom: '1rem' }}
-          >
-            05 — CONTACT
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', fontSize: 'clamp(1.75rem, 4vw, 3rem)', color: '#ffffff', marginBottom: 'clamp(2.5rem, 5vw, 4rem)' }}
-          >
-            Entrons en contact
-          </motion.h1>
-        </div>
-      </section>
+      {/* HERO */}
+      <PageHero
+        eyebrow="05 — CONTACT"
+        title="Contactez-nous"
+        subtitle="Booking, presse, partenariats — nous vous répondons"
+        seed={95}
+      />
 
       {/* Form + Info */}
-      <section style={{ padding: '0 clamp(1.25rem, 5vw, 2.5rem) clamp(4rem, 8vw, 7rem)' }}>
+      <section style={{ padding: 'clamp(4rem, 8vw, 7rem) clamp(1.25rem, 5vw, 2.5rem)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
 
             {/* LEFT: Form */}
-            <motion.div
-              custom={0}
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-            >
+            <motion.div custom={0} initial="hidden" animate="visible" variants={fadeUp}>
               {submitted ? (
-                <div style={{
-                  backgroundColor: '#111111',
-                  border: '1px solid #C0392B',
-                  padding: '3rem 2rem',
-                  textAlign: 'center',
-                }}>
-                  <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '2rem', color: '#C0392B', marginBottom: '1rem' }}>
-                    MESSAGE ENVOYÉ
-                  </p>
-                  <p style={{ color: '#999', fontSize: '0.9rem' }}>
-                    Nous vous répondrons dans les plus brefs délais.
-                  </p>
+                <div style={{ backgroundColor: '#111111', border: '1px solid #C0392B', padding: '3rem 2rem', textAlign: 'center' }}>
+                  <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '2rem', color: '#C0392B', marginBottom: '1rem' }}>MESSAGE ENVOYÉ</p>
+                  <p style={{ color: '#999', fontSize: '0.9rem' }}>Nous vous répondrons dans les plus brefs délais.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   <div>
-                    <label style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', display: 'block', marginBottom: '0.4rem' }}>
-                      Nom *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={form.nom}
-                      onChange={e => setForm({ ...form, nom: e.target.value })}
-                      onFocus={() => setFocused('nom')}
-                      onBlur={() => setFocused(null)}
-                      style={getBorderStyle('nom')}
-                      placeholder="Votre nom"
-                    />
+                    <label style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', display: 'block', marginBottom: '0.4rem' }}>Nom *</label>
+                    <input type="text" required value={form.nom} onChange={e => setForm({ ...form, nom: e.target.value })} onFocus={() => setFocused('nom')} onBlur={() => setFocused(null)} style={getBorderStyle('nom')} placeholder="Votre nom" />
                   </div>
                   <div>
-                    <label style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', display: 'block', marginBottom: '0.4rem' }}>
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={e => setForm({ ...form, email: e.target.value })}
-                      onFocus={() => setFocused('email')}
-                      onBlur={() => setFocused(null)}
-                      style={getBorderStyle('email')}
-                      placeholder="votre@email.com"
-                    />
+                    <label style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', display: 'block', marginBottom: '0.4rem' }}>Email *</label>
+                    <input type="email" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} onFocus={() => setFocused('email')} onBlur={() => setFocused(null)} style={getBorderStyle('email')} placeholder="votre@email.com" />
                   </div>
                   <div>
-                    <label style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', display: 'block', marginBottom: '0.4rem' }}>
-                      Objet
-                    </label>
-                    <select
-                      value={form.objet}
-                      onChange={e => setForm({ ...form, objet: e.target.value })}
-                      onFocus={() => setFocused('objet')}
-                      onBlur={() => setFocused(null)}
-                      style={{ ...getBorderStyle('objet'), cursor: 'pointer' }}
-                    >
+                    <label style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', display: 'block', marginBottom: '0.4rem' }}>Objet</label>
+                    <select value={form.objet} onChange={e => setForm({ ...form, objet: e.target.value })} onFocus={() => setFocused('objet')} onBlur={() => setFocused(null)} style={{ ...getBorderStyle('objet'), cursor: 'pointer' }}>
                       <option value="">Sélectionner...</option>
                       <option value="Booking">Booking</option>
                       <option value="Presse">Presse</option>
@@ -142,33 +86,12 @@ export default function ContactPage() {
                     </select>
                   </div>
                   <div>
-                    <label style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', display: 'block', marginBottom: '0.4rem' }}>
-                      Message *
-                    </label>
-                    <textarea
-                      required
-                      value={form.message}
-                      onChange={e => setForm({ ...form, message: e.target.value })}
-                      onFocus={() => setFocused('message')}
-                      onBlur={() => setFocused(null)}
-                      style={{ ...getBorderStyle('message'), minHeight: '160px', resize: 'vertical' }}
-                      placeholder="Votre message..."
-                    />
+                    <label style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', display: 'block', marginBottom: '0.4rem' }}>Message *</label>
+                    <textarea required value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} onFocus={() => setFocused('message')} onBlur={() => setFocused(null)} style={{ ...getBorderStyle('message'), minHeight: '160px', resize: 'vertical' }} placeholder="Votre message..." />
                   </div>
                   <button
                     type="submit"
-                    style={{
-                      width: '100%',
-                      padding: '1rem',
-                      backgroundColor: '#C0392B',
-                      color: '#ffffff',
-                      border: 'none',
-                      fontFamily: 'var(--font-bebas)',
-                      fontSize: '1rem',
-                      letterSpacing: '0.15em',
-                      marginTop: '0.5rem',
-                      transition: 'background-color 0.2s ease',
-                    }}
+                    style={{ width: '100%', padding: '1rem', backgroundColor: '#C0392B', color: '#ffffff', border: 'none', fontFamily: 'var(--font-bebas)', fontSize: '1rem', letterSpacing: '0.15em', marginTop: '0.5rem', transition: 'background-color 0.2s ease' }}
                     onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#E74C3C')}
                     onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#C0392B')}
                   >
@@ -178,14 +101,8 @@ export default function ContactPage() {
               )}
             </motion.div>
 
-            {/* RIGHT: Contact info */}
-            <motion.div
-              custom={1}
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}
-            >
+            {/* RIGHT: Info */}
+            <motion.div custom={1} initial="hidden" animate="visible" variants={fadeUp} style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
               <div>
                 <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.2rem', letterSpacing: '0.1em', color: '#C0392B', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '1rem' }}>
                   AZÉTO GBÈDÉ MUSIC
@@ -193,44 +110,35 @@ export default function ContactPage() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   <div>
                     <p style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', marginBottom: '0.25rem' }}>Email</p>
-                    <a href="mailto:contact@vanobaby.bj" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '0.9rem' }}>
-                      contact@vanobaby.bj
-                    </a>
+                    <a href="mailto:contact@vanobaby.bj" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '0.9rem' }}>contact@vanobaby.bj</a>
                   </div>
                   <div>
                     <p style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', marginBottom: '0.25rem' }}>Téléphone</p>
-                    <a href="tel:+22900000000" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '0.9rem' }}>
-                      +229 XX XX XX XX
-                    </a>
+                    <a href="tel:+22900000000" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '0.9rem' }}>+229 XX XX XX XX</a>
                   </div>
                 </div>
               </div>
 
               <div>
-                <p style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', marginBottom: '1rem' }}>
-                  Réseaux sociaux
-                </p>
+                <p style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#999', marginBottom: '1rem' }}>Réseaux sociaux</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                   {socials.map(s => (
-                    <a
-                      key={s.name}
-                      href={s.href}
-                      style={{
-                        color: '#ffffff',
-                        textDecoration: 'none',
-                        fontSize: '0.9rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.75rem',
-                      }}
+                    <a key={s.name} href={s.href} style={{ color: '#ffffff', textDecoration: 'none', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}
                       onMouseEnter={e => (e.currentTarget.style.color = '#C0392B')}
-                      onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}
-                    >
+                      onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
                       <span style={{ color: '#C0392B', fontSize: '0.7rem' }}>→</span>
                       {s.name}
                     </a>
                   ))}
                 </div>
+              </div>
+
+              {/* Upcoming concert reminder */}
+              <div style={{ backgroundColor: '#111111', borderLeft: '3px solid #C0392B', padding: '1.5rem' }}>
+                <p style={{ fontSize: '0.6rem', letterSpacing: '0.15em', color: '#C0392B', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Prochain concert</p>
+                <p style={{ fontFamily: 'var(--font-bebas)', color: '#ffffff', fontSize: '1.2rem', letterSpacing: '0.06em', marginBottom: '0.25rem' }}>10 ANS DE RÈGNE</p>
+                <p style={{ color: '#999', fontSize: '0.8rem', marginBottom: '0.75rem' }}>04 Avril 2026 — Cotonou</p>
+                <a href="/concert" style={{ color: '#C0392B', textDecoration: 'none', fontSize: '0.75rem', letterSpacing: '0.1em', fontFamily: 'var(--font-bebas)' }}>RÉSERVER →</a>
               </div>
             </motion.div>
           </div>
@@ -244,35 +152,15 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{
-              backgroundColor: '#111111',
-              borderTop: '3px solid #C0392B',
-              padding: 'clamp(2rem, 5vw, 3rem)',
-            }}
+            style={{ backgroundColor: '#111111', borderTop: '3px solid #C0392B', padding: 'clamp(2rem, 5vw, 3rem)' }}
           >
-            <p style={{ fontSize: '0.7rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#C0392B', marginBottom: '1rem' }}>
-              BOOKING INTERNATIONAL
-            </p>
-            <h3 style={{ fontFamily: 'var(--font-bebas)', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', color: '#ffffff', letterSpacing: '0.04em', marginBottom: '1rem' }}>
-              RED LINE RECORDS
-            </h3>
+            <p style={{ fontSize: '0.7rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#C0392B', marginBottom: '1rem' }}>BOOKING INTERNATIONAL</p>
+            <h3 style={{ fontFamily: 'var(--font-bebas)', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', color: '#ffffff', letterSpacing: '0.04em', marginBottom: '1rem' }}>RED LINE RECORDS</h3>
             <p style={{ color: '#999999', lineHeight: 1.8, fontSize: '0.9rem', maxWidth: '600px' }}>
               Pour toute demande de booking international, festival, tournée ou partenariat artistique hors du Bénin, veuillez contacter directement Red Line Records, label partenaire officiel de Vano Baby pour le marché international depuis 2020.
             </p>
             <div style={{ marginTop: '1.5rem' }}>
-              <a
-                href="mailto:contact@vanobaby.bj"
-                style={{
-                  display: 'inline-block',
-                  color: '#C0392B',
-                  textDecoration: 'none',
-                  fontFamily: 'var(--font-bebas)',
-                  fontSize: '0.9rem',
-                  letterSpacing: '0.12em',
-                  borderBottom: '1px solid rgba(192,57,43,0.3)',
-                  paddingBottom: '2px',
-                }}
-              >
+              <a href="mailto:contact@vanobaby.bj" style={{ display: 'inline-block', color: '#C0392B', textDecoration: 'none', fontFamily: 'var(--font-bebas)', fontSize: '0.9rem', letterSpacing: '0.12em', borderBottom: '1px solid rgba(192,57,43,0.3)', paddingBottom: '2px' }}>
                 CONTACTER RED LINE RECORDS →
               </a>
             </div>

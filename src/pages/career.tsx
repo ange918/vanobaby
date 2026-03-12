@@ -1,4 +1,5 @@
 import Timeline from '@/components/Timeline';
+import PageHero from '@/components/PageHero';
 import { motion } from 'framer-motion';
 
 const eras = [
@@ -7,21 +8,18 @@ const eras = [
     label: 'RAP BRUT',
     desc: 'Énergie de rue, flow percutant. Les premières années forgent un style authentique ancré dans le quotidien de Cotonou.',
     width: 33,
-    color: '#C0392B',
   },
   {
     period: '2018 — 2019',
     label: 'TRANSITION',
-    desc: 'Signature internationale, ouverture stylistique. L\'artiste explore de nouveaux horizons sonores.',
+    desc: "Signature internationale, ouverture stylistique. L'artiste explore de nouveaux horizons sonores.",
     width: 20,
-    color: '#E74C3C',
   },
   {
     period: '2020 — 2024',
     label: 'SON MÉLODIQUE',
     desc: 'Maturité artistique, mélodies envoûtantes, textes profonds. Vano Baby touche un public toujours plus large.',
     width: 47,
-    color: '#C0392B',
   },
 ];
 
@@ -34,6 +32,15 @@ const labels = [
 export default function CareerPage() {
   return (
     <div style={{ backgroundColor: '#111111', minHeight: '100vh' }}>
+
+      {/* HERO */}
+      <PageHero
+        eyebrow="02 — CARRIÈRE"
+        title="10 Ans de Règne"
+        subtitle="Une ascension implacable, une décennie de musique béninoise"
+        seed={70}
+      />
+
       <Timeline />
 
       {/* ÉVOLUTION DU SON */}
@@ -57,8 +64,7 @@ export default function CareerPage() {
             L'évolution du son
           </motion.h2>
 
-          {/* Bar chart */}
-          <div style={{ display: 'flex', gap: '4px', height: 12, marginBottom: '3rem', overflow: 'hidden' }}>
+          <div style={{ display: 'flex', gap: '4px', height: 12, marginBottom: '3rem', overflow: 'hidden', borderRadius: '2px' }}>
             {eras.map((era, i) => (
               <motion.div
                 key={i}
@@ -84,15 +90,9 @@ export default function CareerPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 }}
               >
-                <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '0.65rem', letterSpacing: '0.2em', color: '#999', marginBottom: '0.4rem', textTransform: 'uppercase' }}>
-                  {era.period}
-                </p>
-                <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.5rem', color: '#C0392B', letterSpacing: '0.05em', marginBottom: '0.75rem' }}>
-                  {era.label}
-                </p>
-                <p style={{ color: '#999999', fontSize: '0.82rem', lineHeight: 1.7 }}>
-                  {era.desc}
-                </p>
+                <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '0.65rem', letterSpacing: '0.2em', color: '#999', marginBottom: '0.4rem', textTransform: 'uppercase' }}>{era.period}</p>
+                <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.5rem', color: '#C0392B', letterSpacing: '0.05em', marginBottom: '0.75rem' }}>{era.label}</p>
+                <p style={{ color: '#999999', fontSize: '0.82rem', lineHeight: 1.7 }}>{era.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -127,22 +127,11 @@ export default function CareerPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.12 }}
-                style={{
-                  backgroundColor: '#161616',
-                  border: '0.5px solid rgba(255,255,255,0.06)',
-                  padding: '2.5rem 2rem',
-                  textAlign: 'center',
-                }}
+                style={{ backgroundColor: '#161616', border: '0.5px solid rgba(255,255,255,0.06)', padding: '2.5rem 2rem', textAlign: 'center' }}
               >
-                <p style={{ fontFamily: 'var(--font-bebas)', fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)', color: '#ffffff', letterSpacing: '0.06em', lineHeight: 1.2, marginBottom: '0.75rem' }}>
-                  {label.name}
-                </p>
-                <p style={{ fontSize: '0.72rem', letterSpacing: '0.1em', color: '#999', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                  {label.role}
-                </p>
-                <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.4rem', color: '#C0392B' }}>
-                  {label.year}
-                </p>
+                <p style={{ fontFamily: 'var(--font-bebas)', fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)', color: '#ffffff', letterSpacing: '0.06em', lineHeight: 1.2, marginBottom: '0.75rem' }}>{label.name}</p>
+                <p style={{ fontSize: '0.72rem', letterSpacing: '0.1em', color: '#999', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{label.role}</p>
+                <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.4rem', color: '#C0392B' }}>{label.year}</p>
               </motion.div>
             ))}
           </div>

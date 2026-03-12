@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import PageHero from '@/components/PageHero';
 
 const BLUR = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEB//EABoQAAIDAQEAAAAAAAAAAAAAAAECAwAEBf/aAAgBAQAA/wCwABmX2ikbdbVWJEb3fN//2Q==";
 
@@ -43,28 +44,19 @@ export default function MusicPage() {
   });
 
   return (
-    <div style={{ backgroundColor: '#080808', minHeight: '100vh', paddingTop: '70px' }}>
+    <div style={{ backgroundColor: '#080808', minHeight: '100vh' }}>
 
-      {/* Header */}
-      <section style={{ padding: 'clamp(3rem, 6vw, 5rem) clamp(1.25rem, 5vw, 2.5rem) 0' }}>
+      {/* HERO */}
+      <PageHero
+        eyebrow="03 — DISCOGRAPHIE"
+        title="La Musique"
+        subtitle="10 ans de titres qui ont façonné le rap béninois"
+        seed={80}
+      />
+
+      {/* Filter tabs */}
+      <section style={{ padding: 'clamp(3rem, 6vw, 4rem) clamp(1.25rem, 5vw, 2.5rem) 0' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{ fontSize: '0.7rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#C0392B', marginBottom: '1rem' }}
-          >
-            03 — DISCOGRAPHIE
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', fontSize: 'clamp(1.75rem, 4vw, 3rem)', color: '#ffffff', marginBottom: 'clamp(2rem, 4vw, 3rem)' }}
-          >
-            Les titres qui ont marqué une décennie
-          </motion.h1>
-
-          {/* Filter tabs */}
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
             {tabs.map(tab => (
               <button
@@ -212,35 +204,11 @@ export default function MusicPage() {
             initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            style={{
-              position: 'relative',
-              width: '100%',
-              paddingBottom: '56.25%',
-              backgroundColor: '#111111',
-              border: '1px solid rgba(255,255,255,0.06)',
-            }}
+            style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', backgroundColor: '#111111', border: '1px solid rgba(255,255,255,0.06)' }}
           >
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '1rem',
-            }}>
-              <div style={{
-                width: 72,
-                height: 72,
-                borderRadius: '50%',
-                backgroundColor: '#C0392B',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+              <div style={{ width: 72, height: 72, borderRadius: '50%', backgroundColor: '#C0392B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
               </div>
               <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '1rem', color: '#ffffff', letterSpacing: '0.1em', textAlign: 'center', padding: '0 1rem' }}>
                 VANO BABY — DIYO (CLIP OFFICIEL)
