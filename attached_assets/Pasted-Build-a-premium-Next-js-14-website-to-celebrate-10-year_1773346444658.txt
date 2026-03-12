@@ -1,0 +1,114 @@
+Build a premium Next.js 14 website to celebrate 10 years of career of Beninese artist Vano Baby (aka Azéto Gbèdé).
+
+━━━ TECH STACK ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Framer Motion for animations
+- next/image for optimized images
+- next/font (Google Fonts: Bebas Neue + Playfair Display)
+
+━━━ DESIGN DIRECTION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Dark luxury aesthetic. Strict 3-color palette:
+- Background primary: #080808 (near-black)
+- Background secondary: #111111
+- Red accent: #C0392B (deep red, bold)
+- Red hover/glow: #E74C3C
+- Text primary: #FFFFFF
+- Text muted: #999999
+Custom cursor (red dot). Smooth scroll. Subtle grain texture overlay.
+NO gold. NO beige. Only black, red, white.
+
+━━━ SECTIONS (in order) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. NAVBAR (fixed, transparent → black on scroll)
+   - Logo: "VANO BABY" in Bebas Neue, white
+   - Red underline accent on active link
+   - Links: À propos / Carrière / Musique / Concert / Contact
+   - Hamburger menu on mobile (red animated icon)
+
+2. HERO SECTION (fullscreen, 100vh)
+   - Background: full-bleed photo of Vano Baby
+     → Use https://picsum.photos/1920/1080 as placeholder
+     → Add comment: // TODO: replace with official Vano Baby press photo
+   - Dark overlay (gradient black bottom 60%, slight red tint)
+   - Giant text bottom-left:
+     "VANO" in white outline (text-stroke), 18vw
+     "BABY" in solid red, 18vw
+   - Badge top-left: "2014 — 2024 · 10 ANS DE RÈGNE"
+     → Small white text, red left border, uppercase tracking-widest
+   - Subtitle: "Rappeur béninois · Azéto Gbèdé · Cotonou"
+   - Animated scroll indicator (red pulsing line going down)
+   - Big decorative "10" bottom-right, white outline only, 28vw, opacity 0.07
+
+3. ABOUT SECTION (black background)
+   - 2-column grid (text left, visual right)
+   - Red small label: "01 — À PROPOS"
+   - Heading (white, Playfair Display italic):
+     "Le pionnier du rap béninois intergénérationnel"
+   - Bio: Aurel Sylvanus Adjivon, né le 9 mai 1994 à Sainte-Rita (Cotonou),
+     originaire de Grand-Popo, carrière lancée en 2013, lauréat MTN
+     Découverte Talents 2014, label Azéto Gbèdé Music, hits: Madame,
+     Fitè, Diyo, Chéri Coco, Tu mérites tout
+   - 4 animated stat counters (red numbers, white labels):
+     10+ ANS / 50+ TITRES / 4x AWARDS / 800K+ FANS
+   - Right side: concentric circles decoration, red strokes, 
+     center badge "10 ANS" white on red circle
+
+4. TIMELINE — 10 ans de carrière (#111111 background)
+   - Vertical center line in red
+   - Alternating left/right cards (white text on #161616 cards)
+   - Year in red Bebas Neue (large), title in white, description in gray
+   - Red dot on the center line for each event
+   - Items:
+     2013: "Drague Azonto" — Premier single, naissance d'un phénomène
+     2014: MTN Découverte Talents — Victoire du concours national (5M CFA)
+     2016: "Adigoue Gboun Gboun" — Buzz national, percée au Bénin
+     2017: "Je s'en fou" + "Tonssimè chap" — Collaborations & hits
+     2018: Contrat Universal Music Africa — Reconnaissance internationale
+     2019: "Madame" — Virage artistique, nouveau son romantique
+     2020: Label Red Line Africa — Nouveau partenariat
+     2021: 1er Bénin Top 10 Awards — Meilleur artiste béninois
+     2022: "Diyo" — Tube à conscience sociale
+     2023: Ambassadeur Betclic Bénin — Rayonnement national
+     2024: 10 ans de règne — Méga-concert en préparation
+
+5. DISCOGRAPHIE (black background)
+   - Grid 3 colonnes (2 mobile, 3 desktop)
+   - Cards: #111111 background, white border 0.5px
+   - Placeholder artwork: picsum.photos/300/300?random=N
+   - Hover: red border 2px + slight scale-up + red play button overlay
+   - Featured tracks: Madame, Fitè, Diyo, Chéri Coco, Tu mérites tout,
+     Russie, Je s'en fou, Bella, Vano wè, Drague Azonto
+   - Each card: artwork + title (white) + year (red)
+
+6. CONCERT — MÉGA EVENT 2025/2026
+   - Full black section
+   - Big red heading: "10 ANS DE RÈGNE — LE CONCERT"
+   - Subheading white: "Cotonou, Bénin"
+   - Countdown timer (large, red digits on black, white labels)
+     → Target date: December 31, 2025
+   - CTA button: "Réserver ma place"
+     → Red background, white text, no border-radius (sharp corners), 
+        hover: white background + red text
+
+7. FOOTER (pure black #050505)
+   - "VANO BABY" large in white Bebas Neue center
+   - "AZÉTO GBÈDÉ MUSIC" small red text below
+   - Social icons row: Instagram, Facebook, YouTube, TikTok (white, red on hover)
+   - Bottom line: "© 2024 Vano Baby. Tous droits réservés."
+
+━━━ ANIMATIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Framer Motion: staggered fade-up on scroll (useInView)
+- Hero text: slide in from bottom on load, stagger 0.2s
+- Stat counters: count-up when entering viewport
+- Timeline: slide in from left/right alternating
+- Cursor: red dot + outer ring follows mouse with lag
+
+━━━ IMPORTANT NOTES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- STRICT palette: only #080808 #111111 #161616 / #C0392B #E74C3C / #FFFFFF #999999
+- All photos: next/image with placeholder="blur", each commented // Replace with official press photo
+- Mobile-first, fully responsive
+- SEO: metadata in layout.tsx
+- French language throughout
+- Sharp, bold, raw energy — like a concert poster come to life
