@@ -44,7 +44,7 @@ body::after {
 .nav-link {
   color: #ffffff;
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   position: relative;
@@ -66,11 +66,15 @@ body::after {
   width: 100%;
 }
 
-.track-card:hover .play-overlay {
-  opacity: 1;
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
 }
 
-.track-card:hover {
-  border-color: #C0392B !important;
-  transform: scale(1.03);
+/* Responsive typography helpers */
+@media (max-width: 480px) {
+  .hide-xs {
+    display: none !important;
+  }
 }

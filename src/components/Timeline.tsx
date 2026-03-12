@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 const events = [
@@ -15,10 +15,82 @@ const events = [
   { year: '2024', title: '10 ans de règne', desc: 'Méga-concert en préparation' },
 ];
 
+function useIsMobile() {
+  const [mobile, setMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    setMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+  return mobile;
+}
+
+function CardContent({ event, align }: { event: typeof events[0]; align: 'left' | 'right' }) {
+  return (
+    <>
+      <p style={{ fontFamily: 'var(--font-bebas)', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', color: '#C0392B', lineHeight: 1, marginBottom: '0.25rem' }}>
+        {event.year}
+      </p>
+      <p style={{ color: '#ffffff', fontSize: '0.9rem', fontWeight: 600, marginBottom: '0.4rem' }}>
+        {event.title}
+      </p>
+      <p style={{ color: '#999999', fontSize: '0.78rem', lineHeight: 1.6 }}>
+        {event.desc}
+      </p>
+    </>
+  );
+}
+
 function TimelineCard({ event, index }: { event: typeof events[0]; index: number }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-  const isLeft = index % 2 === 0;
+  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const isMobile = useIsMobile();
+  const isLeft = !isMobile && index % 2 === 0;
+
+  if (isMobile) {
+    return (
+      <div
+        ref={ref}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '28px 1fr',
+          gap: '0.75rem',
+          marginBottom: '1.5rem',
+          alignItems: 'flex-start',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '0.6rem' }}>
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={inView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 0.3 }}
+            style={{
+              width: 10,
+              height: 10,
+              borderRadius: '50%',
+              backgroundColor: '#C0392B',
+              boxShadow: '0 0 0 2px rgba(192,57,43,0.3)',
+              flexShrink: 0,
+            }}
+          />
+        </div>
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          style={{
+            backgroundColor: '#161616',
+            border: '0.5px solid rgba(255,255,255,0.08)',
+            padding: '1rem 1.25rem',
+          }}
+        >
+          <CardContent event={event} align="left" />
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -28,12 +100,10 @@ function TimelineCard({ event, index }: { event: typeof events[0]; index: number
         gridTemplateColumns: '1fr 40px 1fr',
         alignItems: 'center',
         marginBottom: '2.5rem',
-        position: 'relative',
       }}
     >
-      {/* Left card or spacer */}
       <div>
-        {isLeft ? (
+        {isLeft && (
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -45,21 +115,12 @@ function TimelineCard({ event, index }: { event: typeof events[0]; index: number
               textAlign: 'right',
             }}
           >
-            <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '2.5rem', color: '#C0392B', lineHeight: 1, marginBottom: '0.25rem' }}>
-              {event.year}
-            </p>
-            <p style={{ color: '#ffffff', fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-              {event.title}
-            </p>
-            <p style={{ color: '#999999', fontSize: '0.8rem', lineHeight: 1.5 }}>
-              {event.desc}
-            </p>
+            <CardContent event={event} align="right" />
           </motion.div>
-        ) : <div />}
+        )}
       </div>
 
-      {/* Center dot */}
-      <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={inView ? { scale: 1, opacity: 1 } : {}}
@@ -76,9 +137,8 @@ function TimelineCard({ event, index }: { event: typeof events[0]; index: number
         />
       </div>
 
-      {/* Right card or spacer */}
       <div>
-        {!isLeft ? (
+        {!isLeft && (
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -90,27 +150,21 @@ function TimelineCard({ event, index }: { event: typeof events[0]; index: number
               textAlign: 'left',
             }}
           >
-            <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '2.5rem', color: '#C0392B', lineHeight: 1, marginBottom: '0.25rem' }}>
-              {event.year}
-            </p>
-            <p style={{ color: '#ffffff', fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-              {event.title}
-            </p>
-            <p style={{ color: '#999999', fontSize: '0.8rem', lineHeight: 1.5 }}>
-              {event.desc}
-            </p>
+            <CardContent event={event} align="left" />
           </motion.div>
-        ) : <div />}
+        )}
       </div>
     </div>
   );
 }
 
 export default function Timeline() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       id="timeline"
-      style={{ backgroundColor: '#111111', padding: '8rem 2.5rem' }}
+      style={{ backgroundColor: '#111111', padding: 'clamp(4rem, 8vw, 8rem) clamp(1.25rem, 5vw, 2.5rem)' }}
     >
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <motion.p
@@ -137,27 +191,26 @@ export default function Timeline() {
             fontFamily: 'var(--font-playfair)',
             fontStyle: 'italic',
             textAlign: 'center',
-            fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
+            fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
             color: '#ffffff',
-            marginBottom: '5rem',
+            marginBottom: 'clamp(3rem, 6vw, 5rem)',
           }}
         >
           10 ans d'une ascension implacable
         </motion.h2>
 
-        {/* Timeline container with center line */}
         <div style={{ position: 'relative' }}>
-          {/* Vertical line */}
+          {/* Vertical line — desktop: centered, mobile: left */}
           <div
             style={{
               position: 'absolute',
-              left: '50%',
+              left: isMobile ? '14px' : '50%',
               top: 0,
               bottom: 0,
               width: 2,
               backgroundColor: '#C0392B',
-              transform: 'translateX(-50%)',
-              opacity: 0.4,
+              transform: isMobile ? 'none' : 'translateX(-50%)',
+              opacity: 0.35,
             }}
           />
           {events.map((event, i) => (

@@ -1,0 +1,115 @@
+The existing Vano Baby Next.js site is already built. Apply the following modifications only — do not touch what already works.
+
+━━━ MODIFICATION 1 — INTRO LOADER ━━━━━━━━━━━━━━━━━━━━━━
+Create a new file: components/IntroLoader.tsx
+
+Fullscreen intro screen that appears before everything else.
+Use sessionStorage key "vb_intro_seen" — skip loader if already seen.
+
+Layout (pure black #080808, fullscreen fixed z-50):
+- Center: geometric owl SVG (120x120px) with:
+  → White angular body, red glowing eyes
+  → Subtle breathing animation: scale 1 → 1.05 → 1 (loop, 2s)
+- Below owl: "VANO BABY" Bebas Neue, white, letter-spacing 0.4em, 1.4rem
+- Below that: counter + progress bar block (max-width 280px, centered)
+  → Counter: "0" → "100", Bebas Neue 3rem white, right-aligned above bar
+  → Bar: 3px height, red #C0392B, fills left→right over 2.5s easeInOut
+  → Label below bar: "CHARGEMENT" 0.55rem uppercase tracking-widest #999
+
+Animation sequence (Framer Motion):
+  1. Owl + name: fade in opacity 0→1 over 0.6s
+  2. Counter counts 0→100 + bar fills over 2.5s in sync
+  3. At 100: pause 0.3s
+  4. EXIT: screen splits in two halves
+     → Top half: y 0 → "-50vh"
+     → Bottom half: y 0 → "50vh"
+     → Duration 0.7s easeInOut
+  5. Loader unmounts after exit, set sessionStorage "vb_intro_seen"="true"
+
+Wrap all children in app/layout.tsx with this loader:
+  <IntroLoader />
+  <main>{children}</main>
+
+━━━ MODIFICATION 2 — MULTIPAGE ━━━━━━━━━━━━━━━━━━━━━━━━━
+Convert the current single-page site into a multipage structure.
+Keep ALL existing content — just split it into separate pages.
+
+Create these new route files:
+  app/about/page.tsx     → move bio / stats content here + enrich (see below)
+  app/career/page.tsx    → move full timeline here + enrich (see below)
+  app/music/page.tsx     → move discography here + enrich (see below)
+  app/concert/page.tsx   → move concert CTA here + enrich (see below)
+  app/contact/page.tsx   → new page (see below)
+
+Update navbar links to point to these routes.
+Add Framer Motion AnimatePresence page transitions in layout.tsx:
+  each page enters with y: 40→0, opacity 0→1, duration 0.5s
+
+━━━ MODIFICATION 3 — ENRICHIR CHAQUE PAGE ━━━━━━━━━━━━━━
+
+/about — add these sections after existing bio content:
+  - Section "L'EMBLÈME DU HIBOU": large owl SVG (200px) centered,
+    text about symbolism (sagesse, vision nocturne, maître de la nuit)
+  - Section "RÉCOMPENSES": grid 2x3 dark cards, red top border:
+    MTN Découverte Talents 2014 / Universal Music Africa 2018 /
+    Bénin Top 10 Awards 2021 / 2022 / 2023 / Ambassadeur Betclic 2023
+  - Section "CITATIONS PRESSE": 3 pull quotes, Playfair Display italic,
+    alternating red/white large text
+
+/career — add these sections after existing timeline:
+  - Section "ÉVOLUTION DU SON": visual bar
+    2013–2017: "RAP BRUT" → 2018–2019: "TRANSITION" → 2020–2024: "SON MÉLODIQUE"
+    red gradient fill, descriptions under each era
+  - Section "LABELS & PARTENARIATS": 3 text-based logo cards
+    MTN Bénin / Universal Music Africa / Red Line Records
+    (Bebas Neue text logos, no images needed)
+
+/music — add these sections after existing track grid:
+  - Filter tabs above grid: Tous / Singles / Collaborations
+    active tab = red bg white text, inactive = gray hover red
+  - Section "PLATEFORMES DE STREAMING": row of platform badges
+    Spotify / Apple Music / YouTube Music / Deezer / Audiomack / Boomplay
+    dark cards, red arrow, external link placeholder
+  - Section "CLIP VIDÉO": faux YouTube embed
+    black rectangle 16:9, red play button center
+    title: "VANO BABY — DIYO (CLIP OFFICIEL)"
+    comment: // TODO: replace with official YouTube embed URL
+
+/concert — add these sections after existing countdown:
+  - Section "BILLETTERIE": 3 ticket tier cards
+    PELOUSE 15 000 FCFA / TRIBUNE 30 000 FCFA / VIP 75 000 FCFA
+    VIP card: red border + "RECOMMANDÉ" badge
+    each card: list of benefits + "Choisir ce billet" red button
+  - Section "GALERIE": masonry grid 3 cols, 9 picsum photos
+    hover: red overlay + zoom icon
+  - Section "FAQ": accordion (Framer Motion expand/collapse), 6 questions:
+    Accès au site / Parking / Objets interdits /
+    Remboursements / Espace VIP / Streaming du concert
+
+/contact — new page, 2 sections:
+  Section A — 2-column layout:
+    Left: contact form
+      fields: Nom / Email / Objet (select: Booking/Presse/Partenariat/Autre)
+      Message textarea min-height 160px
+      Submit button: red full-width "ENVOYER →"
+      All fields: #161616 bg, white text, red focus border
+    Right: contact info
+      Label: "Azéto Gbèdé Music"
+      Email: contact@vanobaby.bj
+      Tel: +229 XX XX XX XX
+      Social links vertical list (Instagram / Facebook / YouTube / TikTok)
+  Section B — "BOOKING INTERNATIONAL" dark card, red top border
+    Text about Red Line Records for international bookings
+
+━━━ MODIFICATION 4 — OWL COMPONENT ━━━━━━━━━━━━━━━━━━━━━
+Extract the owl SVG into a reusable component:
+components/OwlIcon.tsx
+Props: size (number, default 40), animated (boolean, default false)
+Use it in: IntroLoader / Navbar / Footer / About page / Concert page
+
+━━━ NE PAS MODIFIER ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Color palette (already correct)
+- Existing hero section on homepage
+- Existing stats counters
+- Custom cursor
+- All existing animations
