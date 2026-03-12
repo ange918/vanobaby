@@ -1,0 +1,29 @@
+
+> vanobaby@0.1.0 dev
+> next dev -p 5000 -H 0.0.0.0 -p 5000 -H 0.0.0.0
+
+[1G[0K[1m[38;2;173;127;168m▲ Next.js 16.1.6[39m[22m (Turbopack)
+- Local:         http://localhost:5000
+- Network:       http://0.0.0.0:5000
+
+[32m[1m✓[22m[39m Starting...
+[32m[1m✓[22m[39m Ready in 2.1s
+ GET / [32m200[39m in 1616ms[2m (compile: 1541ms, render: 75ms)[22m
+ GET / [32m200[39m in 1788ms[2m (compile: 1713ms, render: 76ms)[22m
+ GET / [32m200[39m in 161ms[2m (compile: 126ms, render: 36ms)[22m
+ GET / [32m200[39m in 36ms[2m (compile: 6ms, render: 30ms)[22m
+ GET /about [32m200[39m in 61ms[2m (compile: 16ms, render: 45ms)[22m
+ GET / [32m200[39m in 34ms[2m (compile: 4ms, render: 30ms)[22m
+ GET / [32m200[39m in 33ms[2m (compile: 4ms, render: 30ms)[22m
+[32m[1m✓[22m[39m Compiled in 119ms
+[32m[1m✓[22m[39m Compiled in 57ms
+[32m[1m✓[22m[39m Compiled in 261ms
+[32m[1m✓[22m[39m Compiled in 97ms
+[32m[1m✓[22m[39m Compiled in 112ms
+[32m[1m✓[22m[39m Compiled in 75ms
+[32m[1m✓[22m[39m Compiled in 105ms
+[32m[1m✓[22m[39m Compiled in 100ms
+[32m[1m✓[22m[39m Compiled in 96ms
+[32m[1m✓[22m[39m Compiled in 69ms
+ GET / [32m200[39m in 405ms[2m (compile: 332ms, render: 73ms)[22m
+ GET / [32m200[39m in 68ms[2m (compile: 5ms, render: 63ms)[22m
