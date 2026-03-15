@@ -428,90 +428,150 @@ export default function MusicPage() {
       </section>
 
       {/* MINI PLAYER */}
+      <style>{`
+        .mini-player { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; }
+        .mini-player-center { display: flex; }
+        .mini-player-right { display: flex; }
+        .mini-player-mobile-controls { display: none; }
+        .mini-player-volume { display: flex; }
+        .mini-player-heart { display: flex; }
+        @media (max-width: 639px) {
+          .mini-player { grid-template-columns: 1fr auto; }
+          .mini-player-center { display: none; }
+          .mini-player-right { gap: 0.6rem; }
+          .mini-player-mobile-controls { display: flex; align-items: center; gap: 0.6rem; }
+          .mini-player-volume { display: none; }
+          .mini-player-heart { display: none; }
+        }
+      `}</style>
       <AnimatePresence>
         {playingTrack && (
           <motion.div
-            initial={{ y: 72, opacity: 0 }}
+            initial={{ y: 80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 72, opacity: 0 }}
+            exit={{ y: 80, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             style={{
               position: 'fixed',
               bottom: 0,
               left: 0,
               right: 0,
-              height: '72px',
               backgroundColor: '#111111',
               borderTop: '1px solid #222',
-              display: 'grid',
-              gridTemplateColumns: '1fr auto 1fr',
-              alignItems: 'center',
-              padding: '0 1.5rem',
               zIndex: 100,
-              gap: '1rem',
             }}
           >
-            {/* Left: track info */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
-              <div style={{ position: 'relative', width: '48px', height: '48px', borderRadius: '2px', overflow: 'hidden', flexShrink: 0 }}>
-                <Image
-                  src={`https://picsum.photos/48/48?random=${playingTrack.id}`}
-                  alt={playingTrack.title}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-              <div style={{ minWidth: 0 }}>
-                <p style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                  {playingTrack.title}
-                </p>
-                <p style={{ color: '#999', fontSize: '0.75rem' }}>Vano Baby</p>
-              </div>
-              <HeartIcon style={{ width: 18, height: 18, color: '#999', flexShrink: 0, cursor: 'pointer' }} />
+            {/* Full-width progress bar at very top */}
+            <div style={{ width: '100%', height: '3px', backgroundColor: '#2a2a2a' }}>
+              <div style={{ width: `${progress}%`, height: '100%', backgroundColor: '#C0392B', transition: 'width 0.1s linear' }} />
             </div>
 
-            {/* Center: controls + progress */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-                <button onClick={handlePrev} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-                  <BackwardIcon style={{ width: 18, height: 18, color: '#999' }} />
-                </button>
-                <button
-                  onClick={() => setIsPlaying(p => !p)}
-                  style={{
-                    width: 36, height: 36, borderRadius: '50%',
-                    backgroundColor: '#C0392B', border: 'none', cursor: 'pointer',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}
-                >
-                  {isPlaying ? (
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="white">
-                      <rect x="2" y="1" width="4" height="12" rx="1" />
-                      <rect x="8" y="1" width="4" height="12" rx="1" />
-                    </svg>
-                  ) : (
-                    <PlayIcon style={{ width: 16, height: 16, color: '#fff', marginLeft: '2px' }} />
-                  )}
-                </button>
-                <button onClick={handleNext} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-                  <ForwardIcon style={{ width: 18, height: 18, color: '#999' }} />
-                </button>
+            <div
+              className="mini-player"
+              style={{ padding: '0 1rem', height: '68px' }}
+            >
+              {/* Left: track info */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', minWidth: 0 }}>
+                <div style={{ position: 'relative', width: '44px', height: '44px', borderRadius: '2px', overflow: 'hidden', flexShrink: 0 }}>
+                  <Image
+                    src={`https://picsum.photos/48/48?random=${playingTrack.id}`}
+                    alt={playingTrack.title}
+                    fill
+                    sizes="44px"
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+                <div style={{ minWidth: 0 }}>
+                  <p style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {playingTrack.title}
+                  </p>
+                  <p style={{ color: '#999', fontSize: '0.72rem' }}>Vano Baby</p>
+                </div>
+                <span className="mini-player-heart" style={{ alignItems: 'center' }}>
+                  <HeartIcon style={{ width: 18, height: 18, color: '#999', flexShrink: 0, cursor: 'pointer' }} />
+                </span>
               </div>
-              {/* Progress bar */}
-              <div style={{ width: '200px', height: '3px', backgroundColor: '#333', borderRadius: '2px', overflow: 'hidden' }}>
-                <div style={{ width: `${progress}%`, height: '100%', backgroundColor: '#C0392B', transition: 'width 0.1s linear' }} />
-              </div>
-            </div>
 
-            {/* Right: volume + close */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'flex-end' }}>
-              <SpeakerWaveIcon style={{ width: 18, height: 18, color: '#999', flexShrink: 0 }} />
-              <div style={{ width: '80px', height: '3px', backgroundColor: '#333', borderRadius: '2px', overflow: 'hidden' }}>
-                <div style={{ width: '70%', height: '100%', backgroundColor: '#C0392B' }} />
+              {/* Center: prev / play-pause / next + desktop progress bar (hidden on mobile) */}
+              <div
+                className="mini-player-center"
+                style={{ flexDirection: 'column', alignItems: 'center', gap: '0.35rem' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+                  <button onClick={handlePrev} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                    <BackwardIcon style={{ width: 18, height: 18, color: '#999' }} />
+                  </button>
+                  <button
+                    onClick={() => setIsPlaying(p => !p)}
+                    style={{
+                      width: 36, height: 36, borderRadius: '50%',
+                      backgroundColor: '#C0392B', border: 'none', cursor: 'pointer',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}
+                  >
+                    {isPlaying ? (
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="white">
+                        <rect x="2" y="1" width="4" height="12" rx="1" />
+                        <rect x="8" y="1" width="4" height="12" rx="1" />
+                      </svg>
+                    ) : (
+                      <PlayIcon style={{ width: 16, height: 16, color: '#fff', marginLeft: '2px' }} />
+                    )}
+                  </button>
+                  <button onClick={handleNext} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                    <ForwardIcon style={{ width: 18, height: 18, color: '#999' }} />
+                  </button>
+                </div>
+                {/* Desktop-only inner progress bar */}
+                <div style={{ width: '200px', height: '3px', backgroundColor: '#333', borderRadius: '2px', overflow: 'hidden' }}>
+                  <div style={{ width: `${progress}%`, height: '100%', backgroundColor: '#C0392B', transition: 'width 0.1s linear' }} />
+                </div>
               </div>
-              <button onClick={handleClose} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-                <XMarkIcon style={{ width: 20, height: 20, color: '#999' }} />
-              </button>
+
+              {/* Right: mobile play-pause + prev/next + volume (desktop) + close */}
+              <div
+                className="mini-player-right"
+                style={{ alignItems: 'center', gap: '0.75rem', justifyContent: 'flex-end' }}
+              >
+                {/* Mobile-only: prev / play-pause / next */}
+                <span className="mini-player-mobile-controls">
+                  <button onClick={handlePrev} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                    <BackwardIcon style={{ width: 18, height: 18, color: '#999' }} />
+                  </button>
+                  <button
+                    onClick={() => setIsPlaying(p => !p)}
+                    style={{
+                      width: 36, height: 36, borderRadius: '50%',
+                      backgroundColor: '#C0392B', border: 'none', cursor: 'pointer',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}
+                  >
+                    {isPlaying ? (
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="white">
+                        <rect x="2" y="1" width="4" height="12" rx="1" />
+                        <rect x="8" y="1" width="4" height="12" rx="1" />
+                      </svg>
+                    ) : (
+                      <PlayIcon style={{ width: 16, height: 16, color: '#fff', marginLeft: '2px' }} />
+                    )}
+                  </button>
+                  <button onClick={handleNext} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                    <ForwardIcon style={{ width: 18, height: 18, color: '#999' }} />
+                  </button>
+                </span>
+
+                {/* Desktop-only: volume */}
+                <span className="mini-player-volume" style={{ alignItems: 'center', gap: '0.5rem' }}>
+                  <SpeakerWaveIcon style={{ width: 18, height: 18, color: '#999', flexShrink: 0 }} />
+                  <div style={{ width: '80px', height: '3px', backgroundColor: '#333', borderRadius: '2px', overflow: 'hidden' }}>
+                    <div style={{ width: '70%', height: '100%', backgroundColor: '#C0392B' }} />
+                  </div>
+                </span>
+
+                <button onClick={handleClose} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                  <XMarkIcon style={{ width: 20, height: 20, color: '#999' }} />
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
