@@ -12,8 +12,6 @@ import {
   ClockIcon,
 } from '@heroicons/react/24/solid';
 
-const BLUR = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEB//EABoQAAIDAQEAAAAAAAAAAAAAAAECAwAEBf/aAAgBAQAA/wCwABmX2ikbdbVWJEb3fN//2Q==";
-
 const awards = [
   { year: '2014', title: 'MTN Découverte Talents', desc: 'Vainqueur national — 5 millions FCFA' },
   { year: '2018', title: 'Universal Music Africa', desc: 'Signature & reconnaissance internationale' },
@@ -39,9 +37,9 @@ const qualities = [
 ];
 
 const blogPosts = [
-  { title: '"Tu mérites tout" dépasse le million de streams', date: 'Mars 2024', excerpt: 'Le dernier single de Vano Baby franchit une étape historique sur les plateformes de streaming africaines.', seed: 101 },
-  { title: 'Le méga-concert "10 Ans de Règne" confirmé pour avril 2026', date: 'Janvier 2024', excerpt: 'Annonce officielle de la date et du lieu du concert anniversaire tant attendu. Billetterie ouverte.', seed: 102 },
-  { title: 'Vano Baby invité de l\'émission Trace Africa', date: 'Novembre 2023', excerpt: 'L\'artiste revient sur son parcours, son évolution artistique et ses ambitions pour les prochaines années.', seed: 103 },
+  { title: '"Tu mérites tout" dépasse le million de streams', date: 'Mars 2024', excerpt: 'Le dernier single de Vano Baby franchit une étape historique sur les plateformes de streaming africaines.', img: '/blog-1.jpg' },
+  { title: 'Le méga-concert "10 Ans de Règne" confirmé pour avril 2026', date: 'Janvier 2024', excerpt: 'Annonce officielle de la date et du lieu du concert anniversaire tant attendu. Billetterie ouverte.', img: '/blog-2.jpg' },
+  { title: 'Vano Baby invité de l\'émission Trace Africa', date: 'Novembre 2023', excerpt: 'L\'artiste revient sur son parcours, son évolution artistique et ses ambitions pour les prochaines années.', img: '/blog-3.jpg' },
 ];
 
 const fadeUp = {
@@ -256,14 +254,11 @@ export default function AboutPage() {
                 style={{ backgroundColor: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.06)', overflow: 'hidden' }}
               >
                 <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden' }}>
-                  {/* TODO: replace with official press photo */}
                   <Image
-                    src={`https://picsum.photos/600/340?random=${post.seed}`}
+                    src={post.img}
                     alt={post.title}
                     fill
-                    style={{ objectFit: 'cover' }}
-                    placeholder="blur"
-                    blurDataURL={BLUR}
+                    style={{ objectFit: 'cover', objectPosition: 'center top' }}
                   />
                 </div>
                 <div style={{ padding: '1.5rem' }}>
