@@ -1,0 +1,20 @@
+
+> vanobaby@0.1.0 dev
+> next dev -p 5000 -H 0.0.0.0 -p 5000 -H 0.0.0.0
+
+[1G[0K[1m[38;2;173;127;168m▲ Next.js 16.1.6[39m[22m (Turbopack)
+- Local:         http://localhost:5000
+- Network:       http://0.0.0.0:5000
+
+[32m[1m✓[22m[39m Starting...
+[32m[1m✓[22m[39m Ready in 2.5s
+ GET / [32m200[39m in 2.2s[2m (compile: 2.1s, render: 101ms)[22m
+ GET /api/spotify [32m200[39m in 630ms[2m (compile: 26ms, render: 605ms)[22m
+ GET /music [32m200[39m in 1249ms[2m (compile: 1050ms, render: 199ms)[22m
+ GET / [32m200[39m in 91ms[2m (compile: 4ms, render: 87ms)[22m
+ GET /_next/data/development/music.json [32m200[39m in 204ms[2m (compile: 5ms, render: 199ms)[22m
+ GET /_next/data/development/music.json [32m200[39m in 186ms[2m (compile: 4ms, render: 182ms)[22m
+ GET / [32m200[39m in 820ms[2m (compile: 602ms, render: 218ms)[22m
+ GET /_next/data/development/music.json [32m200[39m in 219ms[2m (compile: 6ms, render: 213ms)[22m
+ GET / [32m200[39m in 68ms[2m (compile: 3ms, render: 65ms)[22m
+ GET /concert [32m200[39m in 104ms[2m (compile: 18ms, render: 86ms)[22m

@@ -1,0 +1,18 @@
+
+> vanobaby@0.1.0 dev
+> next dev -p 5000 -H 0.0.0.0 -p 5000 -H 0.0.0.0
+
+[1G[0K[1m[38;2;173;127;168m▲ Next.js 16.1.6[39m[22m (Turbopack)
+- Local:         http://localhost:5000
+- Network:       http://0.0.0.0:5000
+
+[32m[1m✓[22m[39m Starting...
+[32m[1m✓[22m[39m Ready in 739ms
+ GET / [32m200[39m in 1050ms[2m (compile: 974ms, render: 76ms)[22m
+ GET / [32m200[39m in 62ms[2m (compile: 5ms, render: 57ms)[22m
+ GET / [32m200[39m in 143ms[2m (compile: 74ms, render: 68ms)[22m
+ GET / [32m200[39m in 64ms[2m (compile: 4ms, render: 60ms)[22m
+ GET / [32m200[39m in 60ms[2m (compile: 3ms, render: 56ms)[22m
+ GET / [32m200[39m in 63ms[2m (compile: 3ms, render: 61ms)[22m
+ GET / [32m200[39m in 71ms[2m (compile: 8ms, render: 63ms)[22m
+[32m[1m✓[22m[39m Compiled in 111ms

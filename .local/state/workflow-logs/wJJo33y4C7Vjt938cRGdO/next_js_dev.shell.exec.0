@@ -1,0 +1,21 @@
+
+> vanobaby@0.1.0 dev
+> next dev -p 5000 -H 0.0.0.0 -p 5000 -H 0.0.0.0
+
+[1G[0K[1m[38;2;173;127;168m▲ Next.js 16.1.6[39m[22m (Turbopack)
+- Local:         http://localhost:5000
+- Network:       http://0.0.0.0:5000
+
+[32m[1m✓[22m[39m Starting...
+[32m[1m✓[22m[39m Ready in 2.2s
+ GET / [32m200[39m in 2.2s[2m (compile: 2.1s, render: 109ms)[22m
+ GET /music [32m200[39m in 479ms[2m (compile: 390ms, render: 89ms)[22m
+ GET /music [32m200[39m in 84ms[2m (compile: 5ms, render: 79ms)[22m
+ GET / [32m200[39m in 77ms[2m (compile: 5ms, render: 72ms)[22m
+ GET /music [32m200[39m in 96ms[2m (compile: 5ms, render: 91ms)[22m
+ GET /music [32m200[39m in 91ms[2m (compile: 5ms, render: 86ms)[22m
+[32m[1m✓[22m[39m Compiled in 324ms
+[32m[1m✓[22m[39m Compiled in 65ms
+ GET / [32m200[39m in 64ms[2m (compile: 4ms, render: 60ms)[22m
+[32m[1m✓[22m[39m Compiled in 44ms
+[32m[1m✓[22m[39m Compiled in 44ms

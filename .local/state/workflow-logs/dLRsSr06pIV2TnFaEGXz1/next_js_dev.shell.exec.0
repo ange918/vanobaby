@@ -1,0 +1,26 @@
+
+> vanobaby@0.1.0 dev
+> next dev -p 5000 -H 0.0.0.0 -p 5000 -H 0.0.0.0
+
+[1G[0K[1m[38;2;173;127;168m▲ Next.js 16.1.6[39m[22m (Turbopack)
+- Local:         http://localhost:5000
+- Network:       http://0.0.0.0:5000
+
+[32m[1m✓[22m[39m Starting...
+[35m[1mAttention[22m[39m: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+[36mhttps://nextjs.org/telemetry[39m
+
+[32m[1m✓[22m[39m Ready in 732ms
+ GET / [32m200[39m in 2.9s[2m (compile: 2.9s, render: 82ms)[22m
+ GET / [32m200[39m in 184ms[2m (compile: 127ms, render: 57ms)[22m
+[33m[1m⚠[22m[39m Blocked cross-origin request from 39de5aaa-19dd-44e2-b7fb-c73c1aa9dbd7-00-33vljk1xasw70.spock.replit.dev to /_next/* resource. To allow this, configure "allowedDevOrigins" in next.config
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+[33m[1m⚠[22m[39m Found a change in next.config.ts. Restarting the server to apply the changes...
+[1m[38;2;173;127;168m▲ Next.js 16.1.6[39m[22m (Turbopack)
+- Local:         http://localhost:5000
+- Network:       http://0.0.0.0:5000
+
+[32m[1m✓[22m[39m Starting...
+[32m[1m✓[22m[39m Ready in 700ms
