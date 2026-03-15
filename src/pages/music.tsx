@@ -22,24 +22,33 @@ interface Track {
   type: TrackType;
   year: string;
   duration: string;
+  image: string;
 }
 
+const IMG = {
+  tu:    '/clip-track1.jpg',
+  diyo:  '/clip-track2.jpg',
+  fite:  '/clip-track3.jpg',
+  def:   '/page-music.jpg',
+  ev:    '/event-bg.jpg',
+};
+
 const tracks: Track[] = [
-  { id: 1,  title: "Drague Azonto",       type: "SINGLE", year: "2013", duration: "3:42" },
-  { id: 2,  title: "Adigoue Gboun Gboun", type: "SINGLE", year: "2016", duration: "4:01" },
-  { id: 3,  title: "Je s'en fou",         type: "SINGLE", year: "2017", duration: "3:28" },
-  { id: 4,  title: "Tonssimè chap",       type: "FEAT.",  year: "2017", duration: "3:55" },
-  { id: 5,  title: "Madame",              type: "SINGLE", year: "2019", duration: "4:12" },
-  { id: 6,  title: "Bella",               type: "SINGLE", year: "2019", duration: "3:37" },
-  { id: 7,  title: "Russie",              type: "SINGLE", year: "2020", duration: "3:50" },
-  { id: 8,  title: "Vano wè",             type: "SINGLE", year: "2020", duration: "4:05" },
-  { id: 9,  title: "Fitè",                type: "SINGLE", year: "2021", duration: "3:22" },
-  { id: 10, title: "Diyo",                type: "SINGLE", year: "2022", duration: "4:18" },
-  { id: 11, title: "Chéri Coco",          type: "SINGLE", year: "2022", duration: "3:44" },
-  { id: 12, title: "Tu mérites tout",     type: "SINGLE", year: "2023", duration: "4:02" },
-  { id: 13, title: "Oun mi oun",          type: "FEAT.",  year: "2023", duration: "3:31" },
-  { id: 14, title: "Djonou",              type: "SINGLE", year: "2023", duration: "3:58" },
-  { id: 15, title: "Yèdèn",             type: "SINGLE", year: "2024", duration: "4:10" },
+  { id: 1,  title: "Drague Azonto",       type: "SINGLE", year: "2013", duration: "3:42", image: IMG.def },
+  { id: 2,  title: "Adigoue Gboun Gboun", type: "SINGLE", year: "2016", duration: "4:01", image: IMG.ev  },
+  { id: 3,  title: "Je s'en fou",         type: "SINGLE", year: "2017", duration: "3:28", image: IMG.def },
+  { id: 4,  title: "Tonssimè chap",       type: "FEAT.",  year: "2017", duration: "3:55", image: IMG.ev  },
+  { id: 5,  title: "Madame",              type: "SINGLE", year: "2019", duration: "4:12", image: IMG.def },
+  { id: 6,  title: "Bella",               type: "SINGLE", year: "2019", duration: "3:37", image: IMG.ev  },
+  { id: 7,  title: "Russie",              type: "SINGLE", year: "2020", duration: "3:50", image: IMG.def },
+  { id: 8,  title: "Vano wè",             type: "SINGLE", year: "2020", duration: "4:05", image: IMG.ev  },
+  { id: 9,  title: "Fitè",                type: "SINGLE", year: "2021", duration: "3:22", image: IMG.fite },
+  { id: 10, title: "Diyo",                type: "SINGLE", year: "2022", duration: "4:18", image: IMG.diyo },
+  { id: 11, title: "Chéri Coco",          type: "SINGLE", year: "2022", duration: "3:44", image: IMG.def },
+  { id: 12, title: "Tu mérites tout",     type: "SINGLE", year: "2023", duration: "4:02", image: IMG.tu  },
+  { id: 13, title: "Oun mi oun",          type: "FEAT.",  year: "2023", duration: "3:31", image: IMG.ev  },
+  { id: 14, title: "Djonou",              type: "SINGLE", year: "2023", duration: "3:58", image: IMG.def },
+  { id: 15, title: "Yèdèn",              type: "SINGLE", year: "2024", duration: "4:10", image: IMG.ev  },
 ];
 
 const platforms = [
@@ -314,11 +323,13 @@ export default function MusicPage() {
                   {/* Artwork */}
                   <div style={{ position: 'relative', width: '40px', height: '40px', borderRadius: '2px', overflow: 'hidden', flexShrink: 0 }}>
                     <Image
-                      src={`https://picsum.photos/40/40?random=${track.id}`}
+                      src={track.image}
                       alt={track.title}
                       fill
                       sizes="40px"
                       style={{ objectFit: 'cover' }}
+                      placeholder="blur"
+                      blurDataURL={BLUR}
                     />
                   </div>
 

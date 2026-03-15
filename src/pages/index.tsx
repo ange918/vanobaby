@@ -2,6 +2,25 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Hero from '@/components/Hero';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+
+function useCountdown(target: Date) {
+  const calc = () => {
+    const diff = Math.max(0, target.getTime() - Date.now());
+    return {
+      days:    Math.floor(diff / 86_400_000),
+      hours:   Math.floor((diff % 86_400_000) / 3_600_000),
+      minutes: Math.floor((diff % 3_600_000)  / 60_000),
+      seconds: Math.floor((diff % 60_000)     / 1_000),
+    };
+  };
+  const [left, setLeft] = useState(calc);
+  useEffect(() => {
+    const id = setInterval(() => setLeft(calc()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return left;
+}
 
 const BLUR = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEB//EABoQAAIDAQEAAAAAAAAAAAAAAAECAwAEBf/aAAgBAQAA/wCwABmX2ikbdbVWJEb3fN//2Q==";
 
@@ -28,7 +47,10 @@ function Stars({ count }: { count: number }) {
   );
 }
 
+const CONCERT_DATE = new Date('2026-04-04T19:00:00Z'); // 20h00 Cotonou (UTC+1)
+
 export default function Home() {
+  const countdown = useCountdown(CONCERT_DATE);
   return (
     <div style={{ backgroundColor: '#080808' }}>
       <Hero />
@@ -251,14 +273,15 @@ export default function Home() {
               </div>
 
               {/* Mini countdown digits */}
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }} className="hidden md:flex">
+              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }} className="hidden md:flex">
                 {[
-                  { label: 'Jours', num: '23' },
-                  { label: 'Heures', num: '14' },
-                  { label: 'Minutes', num: '37' },
+                  { label: 'Jours',    num: String(countdown.days).padStart(2, '0') },
+                  { label: 'Heures',   num: String(countdown.hours).padStart(2, '0') },
+                  { label: 'Minutes',  num: String(countdown.minutes).padStart(2, '0') },
+                  { label: 'Secondes', num: String(countdown.seconds).padStart(2, '0') },
                 ].map(d => (
                   <div key={d.label} style={{ textAlign: 'center' }}>
-                    <p style={{ fontFamily: 'var(--font-bebas)', fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: '#C0392B', lineHeight: 1 }}>{d.num}</p>
+                    <p style={{ fontFamily: 'var(--font-bebas)', fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: '#C0392B', lineHeight: 1, minWidth: '2ch' }}>{d.num}</p>
                     <p style={{ fontSize: '0.6rem', letterSpacing: '0.15em', color: '#999', textTransform: 'uppercase', marginTop: '0.25rem' }}>{d.label}</p>
                   </div>
                 ))}
