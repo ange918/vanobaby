@@ -5,17 +5,18 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 function useCountdown(target: Date) {
-  const calc = () => {
-    const diff = Math.max(0, target.getTime() - Date.now());
-    return {
-      days:    Math.floor(diff / 86_400_000),
-      hours:   Math.floor((diff % 86_400_000) / 3_600_000),
-      minutes: Math.floor((diff % 3_600_000)  / 60_000),
-      seconds: Math.floor((diff % 60_000)     / 1_000),
-    };
-  };
-  const [left, setLeft] = useState(calc);
+  const [left, setLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   useEffect(() => {
+    const calc = () => {
+      const diff = Math.max(0, target.getTime() - Date.now());
+      return {
+        days:    Math.floor(diff / 86_400_000),
+        hours:   Math.floor((diff % 86_400_000) / 3_600_000),
+        minutes: Math.floor((diff % 3_600_000)  / 60_000),
+        seconds: Math.floor((diff % 60_000)     / 1_000),
+      };
+    };
+    setLeft(calc());
     const id = setInterval(() => setLeft(calc()), 1000);
     return () => clearInterval(id);
   }, []);
