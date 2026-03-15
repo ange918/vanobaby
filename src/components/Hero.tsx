@@ -1,8 +1,6 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-const BLUR_DATA = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEB//EABoQAAIDAQEAAAAAAAAAAAAAAAECAwAEBf/aAAgBAQAA/wCwABmX2ikbdbVWJEb3fN//2Q==";
-
 export default function Hero() {
   return (
     <section
@@ -18,15 +16,12 @@ export default function Hero() {
       }}
     >
       {/* Background Image */}
-      {/* TODO: replace with official Vano Baby press photo */}
       <Image
-        src="https://picsum.photos/1920/1080"
+        src="/hero-bg.jpg"
         alt="Vano Baby"
         fill
         style={{ objectFit: 'cover', objectPosition: 'center top' }}
         priority
-        placeholder="blur"
-        blurDataURL={BLUR_DATA}
       />
 
       {/* Dark gradient overlay */}
