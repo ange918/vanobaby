@@ -38,21 +38,21 @@ export default function Home() {
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-            {/* Decorative side */}
+            {/* Owl photo */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', aspectRatio: '1', maxWidth: '400px', margin: '0 auto', width: '100%' }}
+              style={{ position: 'relative', width: '100%', aspectRatio: '4/3', overflow: 'hidden', borderTop: '3px solid #C0392B' }}
             >
-              {[280, 220, 160].map((size, i) => (
-                <div key={i} style={{ position: 'absolute', width: size, height: size, borderRadius: '50%', border: `1px solid rgba(192,57,43,${0.12 + i * 0.14})` }} />
-              ))}
-              <div style={{ position: 'relative', width: 130, height: 130, overflow: 'hidden', borderRadius: '50%', border: '2px solid #C0392B' }}>
-                {/* TODO: replace with official Vano Baby press photo */}
-                <Image src="https://picsum.photos/200/200?random=42" alt="Vano Baby" fill style={{ objectFit: 'cover' }} placeholder="blur" blurDataURL={BLUR} />
-              </div>
+              <Image
+                src="/about-owl.jpg"
+                alt="Le hibou, emblème de Vano Baby"
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'center center' }}
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 60%, rgba(8,8,8,0.7) 100%)' }} />
             </motion.div>
 
             {/* Text */}
