@@ -3,6 +3,14 @@ import OwlIcon from '@/components/OwlIcon';
 import PageHero from '@/components/PageHero';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import {
+  MicrophoneIcon,
+  MusicalNoteIcon,
+  GlobeAltIcon,
+  SparklesIcon,
+  PencilIcon,
+  ClockIcon,
+} from '@heroicons/react/24/solid';
 
 const BLUR = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEB//EABoQAAIDAQEAAAAAAAAAAAAAAAECAwAEBf/aAAgBAQAA/wCwABmX2ikbdbVWJEb3fN//2Q==";
 
@@ -22,12 +30,12 @@ const quotes = [
 ];
 
 const qualities = [
-  { icon: '🎤', title: 'Authenticité', desc: 'Un flow brut et sincère, ancré dans le vécu quotidien de Cotonou et du peuple béninois.' },
-  { icon: '🎵', title: 'Polyvalence', desc: 'Du rap brut au son mélodique, une maîtrise de multiples registres musicaux qui évolue avec le temps.' },
-  { icon: '🌍', title: 'Connexion', desc: 'Un lien émotionnel unique avec son public béninois et la diaspora africaine — de Lagos à Paris.' },
-  { icon: '🔥', title: 'Scénographie', desc: 'Des performances live mémorables qui électrisent les foules et marquent les esprits.' },
-  { icon: '✍️', title: 'Écriture', desc: 'Des lyrics profonds, entre réalité sociale béninoise et aspirations universelles.' },
-  { icon: '⏳', title: 'Longévité', desc: '10 ans au sommet, une carrière qui traverse les générations et résiste à l\'épreuve du temps.' },
+  { Icon: MicrophoneIcon, title: 'Authenticité', desc: 'Un flow brut et sincère, ancré dans le vécu quotidien de Cotonou et du peuple béninois.' },
+  { Icon: MusicalNoteIcon, title: 'Polyvalence', desc: 'Du rap brut au son mélodique, une maîtrise de multiples registres musicaux qui évolue avec le temps.' },
+  { Icon: GlobeAltIcon, title: 'Connexion', desc: 'Un lien émotionnel unique avec son public béninois et la diaspora africaine — de Lagos à Paris.' },
+  { Icon: SparklesIcon, title: 'Scénographie', desc: 'Des performances live mémorables qui électrisent les foules et marquent les esprits.' },
+  { Icon: PencilIcon, title: 'Écriture', desc: 'Des lyrics profonds, entre réalité sociale béninoise et aspirations universelles.' },
+  { Icon: ClockIcon, title: 'Longévité', desc: '10 ans au sommet, une carrière qui traverse les générations et résiste à l\'épreuve du temps.' },
 ];
 
 const blogPosts = [
@@ -172,7 +180,9 @@ export default function AboutPage() {
                   borderBottom: '2px solid rgba(192,57,43,0.3)',
                 }}
               >
-                <div style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>{q.icon}</div>
+                <div style={{ marginBottom: '1rem' }}>
+                  <q.Icon style={{ width: 28, height: 28, color: '#C0392B' }} />
+                </div>
                 <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.2rem', color: '#C0392B', letterSpacing: '0.06em', marginBottom: '0.6rem' }}>
                   {q.title}
                 </p>
