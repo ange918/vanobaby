@@ -1,0 +1,98 @@
+On the existing app/music/page.tsx, replace the current track grid cards with a Spotify-style playlist layout. Keep all other sections (hero, filter tabs, streaming platforms, video) unchanged.
+
+━━━ PLAYLIST HEADER ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+At the top of the playlist, add a playlist header block (like Spotify):
+- Left: large square cover art (picsum.photos/232/232, rounded-sm)
+- Right of cover:
+  → small label: "PLAYLIST OFFICIELLE" uppercase red tracking-widest 0.6rem
+  → Title: "VANO BABY — 10 ANS" Bebas Neue white 3.5rem
+  → Subtitle: "Azéto Gbèdé Music · 2013–2024"
+  → Meta row: "15 titres · 52 min"
+- Below header: action row
+  → Big red circle PLAY button (triangle icon, 56px)
+  → "TOUT LIRE" small white text next to it
+  → Heart icon (outline white) + "..." menu icon
+
+━━━ COLUMN HEADERS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Below the action row, a sticky column header row:
+  # | (blank for artwork) | TITRE | ALBUM / TYPE | DATE | ⏱
+  - Font: 0.65rem uppercase tracking-widest color #999
+  - Bottom border: 1px solid #222
+  - Sticky: sticks to top of playlist container on scroll
+
+━━━ TRACK ROWS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Each track is a full-width horizontal row. Layout (CSS grid):
+  40px | 56px | 1fr | 1fr | 80px | 50px
+
+Columns:
+  1. Track number (#): gray #999, font-mono
+     → On hover: replace number with red ▶ play icon
+  2. Artwork: 40x40px square image (picsum 40x40?random=N), rounded-sm
+  3. Title + Artist block:
+     → Track title: white 0.9rem font-medium
+     → Artist: "Vano Baby" gray #999 0.8rem
+  4. Type badge: "SINGLE" or "FEAT." 
+     → Small pill: #222 bg, #999 text, 0.6rem
+  5. Year: gray #999 0.8rem
+  6. Duration: gray #999 font-mono 0.8rem (e.g. "3:24")
+
+Row states:
+  - Default: transparent background
+  - Hover: background #1a1a1a, all text becomes white
+  - Active/playing: track number replaced by animated equalizer bars (3 red bars)
+    title text becomes red #C0392B
+
+Row interaction:
+  - onClick: set that track as "currently playing" (local state)
+  - No actual audio needed — just visual active state
+
+━━━ MINI PLAYER BAR (bottom of page, fixed) ━━━━━━━━━━━━━
+When a track is clicked, show a fixed mini player bar at bottom of screen:
+  Height: 72px
+  Background: #111111
+  Top border: 1px solid #222
+  3-column layout:
+
+  Left (track info):
+    - 48x48px artwork
+    - Track title (white 0.85rem) + "Vano Baby" (gray 0.75rem)
+    - Heart icon
+
+  Center (controls):
+    - ⏮ prev  ▶/⏸ play-pause (red, 36px)  ⏭ next
+    - Progress bar below: thin 3px, red fill, gray track
+      → Show fake progress animating when "playing"
+
+  Right:
+    - 🔊 volume icon + thin red slider
+    - Close (×) button to dismiss player
+
+Animate in with Framer Motion: y 72→0, opacity 0→1
+
+━━━ TRACKLIST ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Use this exact data for the tracks array:
+
+const tracks = [
+  { id:1,  title: "Drague Azonto",      type: "SINGLE", year: "2013", duration: "3:42" },
+  { id:2,  title: "Adigoue Gboun Gboun",type: "SINGLE", year: "2016", duration: "4:01" },
+  { id:3,  title: "Je s'en fou",        type: "SINGLE", year: "2017", duration: "3:28" },
+  { id:4,  title: "Tonssimè chap",      type: "FEAT.",  year: "2017", duration: "3:55" },
+  { id:5,  title: "Madame",             type: "SINGLE", year: "2019", duration: "4:12" },
+  { id:6,  title: "Bella",              type: "SINGLE", year: "2019", duration: "3:37" },
+  { id:7,  title: "Russie",             type: "SINGLE", year: "2020", duration: "3:50" },
+  { id:8,  title: "Vano wè",            type: "SINGLE", year: "2020", duration: "4:05" },
+  { id:9,  title: "Fitè",               type: "SINGLE", year: "2021", duration: "3:22" },
+  { id:10, title: "Diyo",               type: "SINGLE", year: "2022", duration: "4:18" },
+  { id:11, title: "Chéri Coco",         type: "SINGLE", year: "2022", duration: "3:44" },
+  { id:12, title: "Tu mérites tout",    type: "SINGLE", year: "2023", duration: "4:02" },
+  { id:13, title: "Oun mi oun",         type: "FEAT.",  year: "2023", duration: "3:31" },
+  { id:14, title: "Djonou",             type: "SINGLE", year: "2023", duration: "3:58" },
+  { id:15, title: "Yèdèn",             type: "SINGLE", year: "2024", duration: "4:10" },
+]
+
+━━━ NE PAS MODIFIER ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Hero section of /music page
+- Filter tabs (Tous / Singles / Collaborations)
+- Streaming platforms section
+- Video section
+- All other pages
