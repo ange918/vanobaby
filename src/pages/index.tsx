@@ -44,7 +44,7 @@ export default function Home() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              style={{ position: 'relative', width: '100%', aspectRatio: '4/3', overflow: 'hidden', borderTop: '3px solid #C0392B', borderRadius: '1rem' }}
+              style={{ position: 'relative', width: '100%', aspectRatio: '1', overflow: 'hidden', border: '3px solid #C0392B', borderRadius: '50%' }}
             >
               <Image
                 src="/about-owl.jpg"
