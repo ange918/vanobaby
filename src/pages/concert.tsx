@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MagnifyingGlassPlusIcon } from '@heroicons/react/24/outline';
 
-const BLUR = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEB//EABoQAAIDAQEAAAAAAAAAAAAAAAECAwAEBf/aAAgBAQAA/wCwABmX2ikbdbVWJEb3fN//2Q==";
 
 const tickets = [
   {
@@ -195,27 +194,32 @@ export default function ConcertPage() {
             L'artiste en scène
           </motion.h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {Array.from({ length: 9 }, (_, i) => i + 20).map((seed, i) => (
+            {[
+              { src: '/about-owl.jpg', alt: 'Vano Baby — tenue hibou' },
+              { src: '/page-about.jpg', alt: 'Vano Baby — +229' },
+              { src: '/blog-1.jpg', alt: 'Vano Baby — portrait orange' },
+              { src: '/event-bg.jpg', alt: 'Vano Baby — Adidas rouge' },
+              { src: '/blog-2.jpg', alt: 'Vano Baby — Adidas gris' },
+              { src: '/about-portrait-1.jpg', alt: 'Vano Baby — lunettes miroir' },
+              { src: '/blog-3.jpg', alt: 'Vano Baby — costume bordeaux' },
+            ].map((photo, i) => (
               <motion.div
-                key={seed}
+                key={photo.src}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
-                onMouseEnter={() => setPhotoHovered(seed)}
+                onMouseEnter={() => setPhotoHovered(i)}
                 onMouseLeave={() => setPhotoHovered(null)}
                 style={{ position: 'relative', aspectRatio: i % 3 === 1 ? '1 / 1.4' : '1', overflow: 'hidden' }}
               >
-                {/* TODO: replace with official press photos */}
                 <Image
-                  src={`https://picsum.photos/400/400?random=${seed}`}
-                  alt={`Photo ${i + 1}`}
+                  src={photo.src}
+                  alt={photo.alt}
                   fill
-                  style={{ objectFit: 'cover', transition: 'transform 0.4s ease', transform: photoHovered === seed ? 'scale(1.08)' : 'scale(1)' }}
-                  placeholder="blur"
-                  blurDataURL={BLUR}
+                  style={{ objectFit: 'cover', objectPosition: 'center top', transition: 'transform 0.4s ease', transform: photoHovered === i ? 'scale(1.08)' : 'scale(1)' }}
                 />
-                <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(192,57,43,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: photoHovered === seed ? 1 : 0, transition: 'opacity 0.3s ease' }}>
+                <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(192,57,43,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: photoHovered === i ? 1 : 0, transition: 'opacity 0.3s ease' }}>
                   <MagnifyingGlassPlusIcon style={{ width: 36, height: 36, color: 'white' }} />
                 </div>
               </motion.div>

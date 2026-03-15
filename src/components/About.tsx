@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 
 const stats = [
   { value: 10, suffix: '+', label: 'ANS', sublabel: 'de carrière' },
@@ -138,46 +139,30 @@ export default function About() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT: Decorative circles */}
+          {/* RIGHT: Photo */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
-            style={{
-              position: 'relative',
-              width: '100%',
-              aspectRatio: '1',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+            initial={{ opacity: 0, x: 40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.9, ease: 'easeOut', delay: 0.3 }}
+            style={{ position: 'relative', width: '100%' }}
           >
-            {[280, 220, 160].map((size, i) => (
-              <div
-                key={i}
-                style={{
-                  position: 'absolute',
-                  width: size,
-                  height: size,
-                  borderRadius: '50%',
-                  border: `1px solid rgba(192,57,43,${0.15 + i * 0.15})`,
-                }}
+            {/* Red accent bar */}
+            <div style={{ position: 'absolute', top: '-1.5rem', left: '-1.5rem', width: '60%', height: '60%', border: '2px solid #C0392B', zIndex: 0, pointerEvents: 'none' }} />
+            <div style={{ position: 'relative', zIndex: 1, aspectRatio: '3/4', overflow: 'hidden' }}>
+              <Image
+                src="/about-owl.jpg"
+                alt="Vano Baby — tenue hibou emblématique"
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
-            ))}
-            <div
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: '50%',
-                backgroundColor: '#C0392B',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+              {/* Bottom gradient overlay */}
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(8,8,8,0.6) 0%, transparent 50%)' }} />
+            </div>
+            {/* 10 ans badge */}
+            <div style={{ position: 'absolute', bottom: '-1.5rem', right: '-1.5rem', zIndex: 2, width: 90, height: 90, borderRadius: '50%', backgroundColor: '#C0392B', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
               <span style={{ fontFamily: 'var(--font-bebas)', fontSize: '2rem', color: '#fff', lineHeight: 1 }}>10</span>
-              <span style={{ fontSize: '0.55rem', letterSpacing: '0.15em', color: '#fff', textTransform: 'uppercase' }}>ANS</span>
+              <span style={{ fontSize: '0.5rem', letterSpacing: '0.15em', color: '#fff', textTransform: 'uppercase' }}>ANS</span>
             </div>
           </motion.div>
         </div>
