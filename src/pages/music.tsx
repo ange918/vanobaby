@@ -228,23 +228,25 @@ export default function MusicPage() {
           </div>
 
           {/* Column headers */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '40px 56px 1fr 1fr 80px 50px',
-            gap: '0 1rem',
-            padding: '0.5rem 0.75rem',
-            borderBottom: '1px solid #222',
-            position: 'sticky',
-            top: 0,
-            backgroundColor: '#080808',
-            zIndex: 10,
-            marginBottom: '0.25rem',
-          }}>
-            {['#', '', 'TITRE', 'ALBUM / TYPE', 'DATE', '⏱'].map((h, i) => (
-              <span key={i} style={{ color: '#999', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-                {h}
-              </span>
-            ))}
+          <div
+            className="track-row"
+            style={{
+              gap: '0 1rem',
+              padding: '0.5rem 0.75rem',
+              borderBottom: '1px solid #222',
+              position: 'sticky',
+              top: 0,
+              backgroundColor: '#080808',
+              zIndex: 10,
+              marginBottom: '0.25rem',
+            }}
+          >
+            <span style={{ color: '#999', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}>#</span>
+            <span style={{ color: '#999', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}></span>
+            <span style={{ color: '#999', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}>TITRE</span>
+            <span className="track-col-type" style={{ color: '#999', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}>TYPE</span>
+            <span className="track-col-year" style={{ color: '#999', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}>DATE</span>
+            <span style={{ color: '#999', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}>⏱</span>
           </div>
 
           {/* Track rows */}
@@ -261,11 +263,9 @@ export default function MusicPage() {
                   onClick={() => handleTrackClick(track)}
                   onMouseEnter={() => setHoveredTrack(track.id)}
                   onMouseLeave={() => setHoveredTrack(null)}
+                  className="track-row"
                   style={{
-                    display: 'grid',
-                    gridTemplateColumns: '40px 56px 1fr 1fr 80px 50px',
                     gap: '0 1rem',
-                    alignItems: 'center',
                     padding: '0.5rem 0.75rem',
                     backgroundColor: isHovered ? '#1a1a1a' : 'transparent',
                     borderRadius: '4px',
@@ -310,7 +310,7 @@ export default function MusicPage() {
                   </div>
 
                   {/* Type badge */}
-                  <div>
+                  <div className="track-col-type">
                     <span style={{
                       display: 'inline-block',
                       backgroundColor: '#222',
@@ -325,7 +325,7 @@ export default function MusicPage() {
                   </div>
 
                   {/* Year */}
-                  <span style={{ color: isHovered ? '#fff' : '#999', fontSize: '0.8rem', transition: 'color 0.15s' }}>
+                  <span className="track-col-year" style={{ color: isHovered ? '#fff' : '#999', fontSize: '0.8rem', transition: 'color 0.15s' }}>
                     {track.year}
                   </span>
 
@@ -427,7 +427,7 @@ export default function MusicPage() {
         </div>
       </section>
 
-      {/* MINI PLAYER */}
+      {/* MINI PLAYER + TRACK ROW RESPONSIVE STYLES */}
       <style>{`
         .mini-player { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; }
         .mini-player-center { display: flex; }
@@ -435,6 +435,11 @@ export default function MusicPage() {
         .mini-player-mobile-controls { display: none; }
         .mini-player-volume { display: flex; }
         .mini-player-heart { display: flex; }
+
+        .track-row { display: grid !important; grid-template-columns: 40px 56px 1fr 1fr 80px 50px !important; gap: 0 1rem; align-items: center; }
+        .track-col-type { display: block; }
+        .track-col-year { display: block; }
+
         @media (max-width: 639px) {
           .mini-player { grid-template-columns: 1fr auto; }
           .mini-player-center { display: none; }
@@ -442,6 +447,10 @@ export default function MusicPage() {
           .mini-player-mobile-controls { display: flex; align-items: center; gap: 0.6rem; }
           .mini-player-volume { display: none; }
           .mini-player-heart { display: none; }
+
+          .track-row { grid-template-columns: 32px 44px 1fr 44px !important; }
+          .track-col-type { display: none !important; }
+          .track-col-year { display: none !important; }
         }
       `}</style>
       <AnimatePresence>
