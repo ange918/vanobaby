@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function CustomCursor() {
+  const [isPointer, setIsPointer] = useState(false);
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
@@ -9,13 +10,20 @@ export default function CustomCursor() {
   const ringY = useSpring(mouseY, { damping: 30, stiffness: 200 });
 
   useEffect(() => {
+    setIsPointer(window.matchMedia('(pointer: fine)').matches);
+  }, []);
+
+  useEffect(() => {
+    if (!isPointer) return;
     const move = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
     window.addEventListener('mousemove', move);
     return () => window.removeEventListener('mousemove', move);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, isPointer]);
+
+  if (!isPointer) return null;
 
   return (
     <>

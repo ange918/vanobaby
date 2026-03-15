@@ -56,7 +56,7 @@ export default function Hero() {
         style={{
           position: 'absolute',
           top: '100px',
-          left: '2.5rem',
+          left: 'clamp(1.25rem, 5vw, 2.5rem)',
           zIndex: 10,
           borderLeft: '3px solid #C0392B',
           paddingLeft: '0.75rem',
@@ -95,7 +95,7 @@ export default function Hero() {
       </div>
 
       {/* Main Content */}
-      <div style={{ position: 'relative', zIndex: 10, padding: '0 2.5rem 5rem' }}>
+      <div style={{ position: 'relative', zIndex: 10, padding: '0 clamp(1.25rem, 5vw, 2.5rem) clamp(3rem, 8vw, 5rem)' }}>
         {/* VANO */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}

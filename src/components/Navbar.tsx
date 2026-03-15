@@ -59,7 +59,7 @@ export default function Navbar() {
           VANO BABY
         </Link>
 
-        <div style={{ display: 'flex', gap: 'clamp(1.5rem, 3vw, 2.5rem)', alignItems: 'center' }} className="hidden md:flex">
+        <div style={{ gap: 'clamp(1.5rem, 3vw, 2.5rem)', alignItems: 'center' }} className="hidden md:flex">
           {links.map((link) => {
             const active = router.pathname === link.href;
             return (
@@ -95,7 +95,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ background: 'none', border: 'none', padding: '0.5rem', display: 'flex', flexDirection: 'column', gap: '5px' }}
+          style={{ background: 'none', border: 'none', padding: '0.5rem', flexDirection: 'column', gap: '5px' }}
           className="flex md:hidden"
           aria-label="Menu"
         >

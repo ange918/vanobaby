@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 * {
-  cursor: none;
   box-sizing: border-box;
+}
+
+@media (pointer: fine) {
+  * {
+    cursor: none;
+  }
 }
 
 html {

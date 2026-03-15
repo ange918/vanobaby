@@ -51,7 +51,7 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      style={{ backgroundColor: '#080808', padding: '8rem 2.5rem' }}
+      style={{ backgroundColor: '#080808', padding: 'clamp(4rem, 8vw, 8rem) clamp(1.25rem, 5vw, 2.5rem)' }}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div className="grid md:grid-cols-2 gap-16 items-center">
