@@ -197,9 +197,8 @@ export default function Home() {
           >
             {/* Background image */}
             <div style={{ position: 'absolute', inset: 0 }}>
-              {/* TODO: replace with official event photo */}
-              <Image src="https://picsum.photos/1200/500?random=99" alt="Concert" fill style={{ objectFit: 'cover', objectPosition: 'center 40%' }} placeholder="blur" blurDataURL={BLUR} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(8,8,8,0.97) 50%, rgba(8,8,8,0.4) 100%)' }} />
+              <Image src="/event-bg.jpg" alt="Concert" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(8,8,8,0.97) 50%, rgba(8,8,8,0.5) 100%)' }} />
             </div>
 
             <div style={{ position: 'relative', zIndex: 2, padding: 'clamp(2.5rem, 5vw, 4rem)' }} className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
