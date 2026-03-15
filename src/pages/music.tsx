@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import PageHero from '@/components/PageHero';
+import { PlayCircleIcon, PlayIcon } from '@heroicons/react/24/solid';
 
 const BLUR = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEB//EABoQAAIDAQEAAAAAAAAAAAAAAAECAwAEBf/aAAgBAQAA/wCwABmX2ikbdbVWJEb3fN//2Q==";
 
@@ -115,10 +116,7 @@ export default function MusicPage() {
                     blurDataURL={BLUR}
                   />
                   <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(192,57,43,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: hoveredTrack === track.seed ? 1 : 0, transition: 'opacity 0.25s ease' }}>
-                    <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
-                      <circle cx="24" cy="24" r="23" stroke="white" strokeWidth="1.5" />
-                      <path d="M20 16l14 8-14 8V16z" fill="white" />
-                    </svg>
+                    <PlayCircleIcon style={{ width: 52, height: 52, color: 'white' }} />
                   </div>
                 </div>
                 <div style={{ padding: '0.9rem 1.1rem' }}>
@@ -209,7 +207,7 @@ export default function MusicPage() {
           >
             <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
               <div style={{ width: 72, height: 72, borderRadius: '50%', backgroundColor: '#C0392B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+                <PlayIcon style={{ width: 32, height: 32, color: 'white' }} />
               </div>
               <p style={{ fontFamily: 'var(--font-bebas)', fontSize: '1rem', color: '#ffffff', letterSpacing: '0.1em', textAlign: 'center', padding: '0 1rem' }}>
                 VANO BABY — DIYO (CLIP OFFICIEL)

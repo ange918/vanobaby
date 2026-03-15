@@ -3,6 +3,7 @@ import Concert from '@/components/Concert';
 import PageHero from '@/components/PageHero';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MagnifyingGlassPlusIcon } from '@heroicons/react/24/outline';
 
 const BLUR = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEB//EABoQAAIDAQEAAAAAAAAAAAAAAAECAwAEBf/aAAgBAQAA/wCwABmX2ikbdbVWJEb3fN//2Q==";
 
@@ -215,9 +216,7 @@ export default function ConcertPage() {
                   blurDataURL={BLUR}
                 />
                 <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(192,57,43,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: photoHovered === seed ? 1 : 0, transition: 'opacity 0.3s ease' }}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                    <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35M11 8v6M8 11h6" />
-                  </svg>
+                  <MagnifyingGlassPlusIcon style={{ width: 36, height: 36, color: 'white' }} />
                 </div>
               </motion.div>
             ))}

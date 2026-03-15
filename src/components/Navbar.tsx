@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const links = [
   { label: 'À propos', href: '/about' },
@@ -95,13 +96,19 @@ export default function Navbar() {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ background: 'none', border: 'none', padding: '0.5rem', flexDirection: 'column', gap: '5px' }}
+          style={{ background: 'none', border: 'none', padding: '0.5rem' }}
           className="flex md:hidden"
           aria-label="Menu"
         >
-          <motion.span animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }} style={{ display: 'block', width: 24, height: 2, backgroundColor: '#C0392B', transformOrigin: 'center' }} />
-          <motion.span animate={{ opacity: menuOpen ? 0 : 1 }} style={{ display: 'block', width: 24, height: 2, backgroundColor: '#C0392B' }} />
-          <motion.span animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7 : 0 }} style={{ display: 'block', width: 24, height: 2, backgroundColor: '#C0392B', transformOrigin: 'center' }} />
+          <motion.div
+            animate={{ rotate: menuOpen ? 90 : 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            {menuOpen
+              ? <XMarkIcon style={{ width: 26, height: 26, color: '#C0392B' }} />
+              : <Bars3Icon style={{ width: 26, height: 26, color: '#C0392B' }} />
+            }
+          </motion.div>
         </button>
       </motion.nav>
 

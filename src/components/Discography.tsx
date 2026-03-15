@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { PlayCircleIcon } from '@heroicons/react/24/outline';
 
 const BLUR_DATA = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEB//EABoQAAIDAQEAAAAAAAAAAAAAAAECAwAEBf/aAAgBAQAA/wCwABmX2ikbdbVWJEb3fN//2Q==";
 
@@ -63,10 +64,7 @@ function TrackCard({ track, index }: { track: typeof tracks[0]; index: number })
             transition: 'opacity 0.25s ease',
           }}
         >
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <circle cx="24" cy="24" r="23" stroke="white" strokeWidth="1.5" />
-            <path d="M20 16l14 8-14 8V16z" fill="white" />
-          </svg>
+          <PlayCircleIcon style={{ width: 56, height: 56, color: 'white' }} />
         </div>
       </div>
 
