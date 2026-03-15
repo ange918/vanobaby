@@ -1,0 +1,111 @@
+Integrate the Spotify API into the existing app/music/page.tsx to display real data from Vano Baby's Spotify profile. Do not touch any other page.
+
+━━━ CREDENTIALS (already in Replit Secrets) ━━━━━━━━━━━━━
+SPOTIFY_CLIENT_ID     → process.env.SPOTIFY_CLIENT_ID
+SPOTIFY_CLIENT_SECRET → process.env.SPOTIFY_CLIENT_SECRET
+SPOTIFY_ARTIST_ID     = 6VxXJZxxq0cmpBvbVM8p0E
+
+━━━ ÉTAPE 1 — API ROUTE (server-side token) ━━━━━━━━━━━━━
+Create app/api/spotify/route.ts
+
+Use Spotify Client Credentials Flow (no user login needed):
+POST https://accounts.spotify.com/api/token
+  body: grant_type=client_credentials
+  headers: Authorization: Basic base64(CLIENT_ID:CLIENT_SECRET)
+
+Then fetch these 3 endpoints with the token:
+
+1. Artist info:
+   GET https://api.spotify.com/v1/artists/6VxXJZxxq0cmpBvbVM8p0E
+   → returns: name, followers.total, images[], popularity, genres[]
+
+2. Top tracks:
+   GET https://api.spotify.com/v1/artists/6VxXJZxxq0cmpBvbVM8p0E/top-tracks?market=BJ
+   → returns array of tracks, each with:
+      id, name, duration_ms, popularity,
+      preview_url (30s audio clip — can be null),
+      album.name, album.images[],
+      external_urls.spotify (link to open in Spotify)
+
+3. Albums:
+   GET https://api.spotify.com/v1/artists/6VxXJZxxq0cmpBvbVM8p0E/albums?include_groups=single,album&market=BJ&limit=20
+   → returns: id, name, release_date, images[], total_tracks, external_urls.spotify
+
+Return all 3 as a single JSON response:
+  { artist, topTracks, albums }
+
+Add Next.js cache revalidation: revalidate every 3600 seconds (1 hour)
+
+━━━ ÉTAPE 2 — PAGE /music (server component) ━━━━━━━━━━━
+Make app/music/page.tsx a Next.js server component.
+Fetch data from /api/spotify at build/request time.
+Pass data as props to client components below.
+
+━━━ ÉTAPE 3 — PLAYLIST HEADER (real data) ━━━━━━━━━━━━━━
+Replace placeholder header with real Spotify data:
+- Cover: artist.images[0].url via next/image
+- Title: "VANO BABY — TOP TRACKS"
+- Followers: artist.followers.total formatted (e.g. "124 583 auditeurs")
+- Popularity score: artist.popularity + "/100"
+- Genres: artist.genres joined with " · "
+- Meta: "{topTracks.length} titres"
+- Green Spotify button: "OUVRIR SUR SPOTIFY"
+  → links to artist external_urls.spotify, opens in new tab
+
+━━━ ÉTAPE 4 — TRACKLIST (real data) ━━━━━━━━━━━━━━━━━━━━
+Replace static tracks array with real topTracks from API.
+
+Each row displays:
+  # | artwork (album.images[2] 64px) | title + album name | release year | duration
+
+Duration: convert duration_ms to "m:ss" format
+
+preview_url handling:
+  - If preview_url exists → clicking the row plays the 30s audio preview
+    using HTML5 Audio API: new Audio(track.preview_url)
+  - If preview_url is null → clicking opens track on Spotify (external_urls.spotify)
+  - Show a small Spotify icon on rows where preview is unavailable
+
+Playing state:
+  - Active row: red title + animated equalizer (3 red bars SVG)
+  - Pause if same track clicked again
+  - Only one track plays at a time (stop previous before starting new)
+
+━━━ ÉTAPE 5 — MINI PLAYER (real audio) ━━━━━━━━━━━━━━━━━
+Mini player at bottom uses real data:
+- Artwork: album.images[1].url (300px version)
+- Track title + album name
+- Real audio playback via HTML5 Audio (preview_url)
+- Progress bar: updates in real time with audio.currentTime / audio.duration
+- Duration shows real track duration (from duration_ms)
+- "Écouter sur Spotify" link → external_urls.spotify
+
+━━━ ÉTAPE 6 — ALBUMS SECTION ━━━━━━━━━━━━━━━━━━━━━━━━━━
+Add a new section below the tracklist: "SINGLES & ALBUMS"
+Grid 4 cols desktop / 2 mobile
+
+Each card (real data):
+  - Artwork: album.images[0].url via next/image
+  - Title: album.name (white, Bebas Neue)
+  - Year: album.release_date.slice(0,4) (red)
+  - Total tracks badge
+  - Hover: red border + "Ouvrir sur Spotify" overlay button
+  - Click: opens album.external_urls.spotify in new tab
+
+━━━ ÉTAPE 7 — LOADING & ERROR STATES ━━━━━━━━━━━━━━━━━━
+Create app/music/loading.tsx:
+  - Skeleton playlist rows (5 rows, pulse animation)
+  - Dark #161616 bars, red shimmer effect
+
+Create app/music/error.tsx:
+  - "Impossible de charger les données Spotify"
+  - Retry button
+  - Fallback: show static tracks array as backup
+
+━━━ NE PAS MODIFIER ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Hero section of /music
+- Filter tabs
+- Streaming platforms section
+- Video section
+- All other pages
+- Color palette and design system
