@@ -38,7 +38,8 @@ export default function CareerPage() {
         eyebrow="02 — CARRIÈRE"
         title="10 Ans de Règne"
         subtitle="Une ascension implacable, une décennie de musique béninoise"
-        seed={70}
+        imageSrc="/page-career.jpg"
+        imagePosition="center center"
       />
 
       <Timeline />

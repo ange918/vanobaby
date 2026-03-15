@@ -50,7 +50,8 @@ export default function AboutPage() {
         eyebrow="01 — À PROPOS"
         title="Vano Baby"
         subtitle="10 ans de règne — La légende du rap béninois"
-        seed={60}
+        imageSrc="/page-about.jpg"
+        imagePosition="center top"
       />
 
       <About />

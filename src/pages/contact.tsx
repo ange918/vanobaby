@@ -50,7 +50,8 @@ export default function ContactPage() {
         eyebrow="05 — CONTACT"
         title="Contactez-nous"
         subtitle="Booking, presse, partenariats — nous vous répondons"
-        seed={95}
+        imageSrc="/page-contact.jpg"
+        imagePosition="center center"
       />
 
       {/* Form + Info */}

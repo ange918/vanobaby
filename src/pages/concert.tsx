@@ -88,7 +88,8 @@ export default function ConcertPage() {
         eyebrow="04 — CONCERT"
         title="10 Ans de Règne"
         subtitle="04 Avril 2026 — Cotonou, Bénin"
-        seed={90}
+        imageSrc="/page-concert.jpg"
+        imagePosition="center center"
       />
 
       <Concert />

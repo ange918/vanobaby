@@ -51,7 +51,8 @@ export default function MusicPage() {
         eyebrow="03 — DISCOGRAPHIE"
         title="La Musique"
         subtitle="10 ans de titres qui ont façonné le rap béninois"
-        seed={80}
+        imageSrc="/page-music.jpg"
+        imagePosition="center top"
       />
 
       {/* Filter tabs */}

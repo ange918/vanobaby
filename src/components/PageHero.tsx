@@ -1,16 +1,15 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-const BLUR = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEB//EABoQAAIDAQEAAAAAAAAAAAAAAAECAwAEBf/aAAgBAQAA/wCwABmX2ikbdbVWJEb3fN//2Q==";
-
 interface PageHeroProps {
   eyebrow: string;
   title: string;
   subtitle?: string;
-  seed?: number;
+  imageSrc: string;
+  imagePosition?: string;
 }
 
-export default function PageHero({ eyebrow, title, subtitle, seed = 50 }: PageHeroProps) {
+export default function PageHero({ eyebrow, title, subtitle, imageSrc, imagePosition = 'center 30%' }: PageHeroProps) {
   return (
     <section
       style={{
@@ -22,15 +21,12 @@ export default function PageHero({ eyebrow, title, subtitle, seed = 50 }: PageHe
         paddingTop: '70px',
       }}
     >
-      {/* TODO: replace with official Vano Baby press photo */}
       <Image
-        src={`https://picsum.photos/1400/600?random=${seed}`}
+        src={imageSrc}
         alt={title}
         fill
-        style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
+        style={{ objectFit: 'cover', objectPosition: imagePosition }}
         priority
-        placeholder="blur"
-        blurDataURL={BLUR}
       />
 
       {/* Gradient overlay */}
