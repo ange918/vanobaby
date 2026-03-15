@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 const BLUR = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEB//EABoQAAIDAQEAAAAAAAAAAAAAAAECAwAEBf/aAAgBAQAA/wCwABmX2ikbdbVWJEb3fN//2Q==";
 
 const latestTracks = [
-  { title: 'Tu mérites tout', year: '2023', seed: 5 },
-  { title: 'Diyo', year: '2022', seed: 3 },
-  { title: 'Chéri Coco', year: '2021', seed: 4 },
+  { title: 'Tu mérites tout', year: '2023', image: '/clip-track1.jpg' },
+  { title: 'Diyo',            year: '2022', image: '/clip-track2.jpg' },
+  { title: 'Fitè',            year: '2021', image: '/clip-track3.jpg' },
 ];
 
 const reviews = [
@@ -141,9 +141,10 @@ export default function Home() {
                 <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
                   {/* TODO: replace with official press photo */}
                   <Image
-                    src={`https://picsum.photos/600/340?random=${track.seed}`}
+                    src={track.image}
                     alt={track.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     style={{ objectFit: 'cover' }}
                     placeholder="blur"
                     blurDataURL={BLUR}
