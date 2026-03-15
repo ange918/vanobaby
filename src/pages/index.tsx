@@ -44,15 +44,16 @@ export default function Home() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              style={{ position: 'relative', width: '100%', aspectRatio: '1', overflow: 'hidden', border: '3px solid #C0392B', borderRadius: '50%' }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-              <Image
-                src="/about-owl.jpg"
-                alt="Le hibou, emblème de Vano Baby"
-                fill
-                style={{ objectFit: 'cover', objectPosition: 'center center' }}
-              />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 60%, rgba(8,8,8,0.7) 100%)' }} />
+              <div style={{ position: 'relative', width: 'min(100%, 360px)', aspectRatio: '1', overflow: 'hidden', border: '3px solid #C0392B', borderRadius: '50%' }}>
+                <Image
+                  src="/about-owl.jpg"
+                  alt="Le hibou, emblème de Vano Baby"
+                  fill
+                  style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
+                />
+              </div>
             </motion.div>
 
             {/* Text */}
