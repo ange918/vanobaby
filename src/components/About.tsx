@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 
 const stats = [
   { value: 10, suffix: '+', label: 'ANS', sublabel: 'de carrière' },
@@ -138,47 +139,30 @@ export default function About() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT: Decorative circles */}
+          {/* RIGHT: Owl photo */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
             style={{
               position: 'relative',
               width: '100%',
-              aspectRatio: '1',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              aspectRatio: '4/3',
+              overflow: 'hidden',
+              borderTop: '3px solid #C0392B',
             }}
           >
-            {[280, 220, 160].map((size, i) => (
-              <div
-                key={i}
-                style={{
-                  position: 'absolute',
-                  width: size,
-                  height: size,
-                  borderRadius: '50%',
-                  border: `1px solid rgba(192,57,43,${0.15 + i * 0.15})`,
-                }}
-              />
-            ))}
-            <div
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: '50%',
-                backgroundColor: '#C0392B',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <span style={{ fontFamily: 'var(--font-bebas)', fontSize: '2rem', color: '#fff', lineHeight: 1 }}>10</span>
-              <span style={{ fontSize: '0.55rem', letterSpacing: '0.15em', color: '#fff', textTransform: 'uppercase' }}>ANS</span>
-            </div>
+            <Image
+              src="/about-owl.jpg"
+              alt="Le hibou, emblème de Vano Baby"
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center center' }}
+            />
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to bottom, transparent 60%, rgba(8,8,8,0.7) 100%)',
+            }} />
           </motion.div>
         </div>
       </div>
